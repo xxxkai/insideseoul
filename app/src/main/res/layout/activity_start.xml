@@ -11,31 +11,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:textAlignment="center">
 
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="150dp"
-     />
-    <ImageView
-        android:id="@+id/imageView"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading..."
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <ImageView
+            android:id="@+id/loading_img"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:srcCompat="@drawable/loading_0"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ffffff"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageView
+        android:id="@+id/start_logo"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:srcCompat="@drawable/logo_512"
-    />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-    />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="By Team InsideSeoul"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        />
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/loading_logo" />
 
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seoul"
+            android:textSize="50dp"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="130dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By Team InsideSeoul"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Ver0.01"
+            android:textAlignment="viewEnd"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
