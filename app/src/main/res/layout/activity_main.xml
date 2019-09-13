@@ -8,4 +8,198 @@
     android:background="#99d8de"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <!-- 헤더 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.8"
+            android:background="@drawable/header_title">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/header_menu"
+                android:layout_weight="0.13" />
+
+            <Button
+                android:id="@+id/BT_TITLE"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.74"
+                android:background="#00ff0000" />
+
+            <Button
+                android:id="@+id/BT_HOME"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.13"
+                android:background="@drawable/header_home"
+                android:onClick="goHome" />
+        </LinearLayout>
+
+        <!-- 콘텐츠 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="8.4"
+            android:background="#ffffff">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- 이 곳에 콘텐츠를 넣습니다.-->
+                    <!-- 콘텐츠 라인 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/BT_CAT1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/BT_CAT2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <!-- 콘텐츠 라인 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/BT_CAT3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/BT_CAT4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <!-- 콘텐츠 라인 3 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/BT_CAT5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/BT_CAT6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <!-- 콘텐츠 라인 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/BT_CAT7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/BT_CAT8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/test_icon"
+                            android:onClick="goCategory"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 이 곳에 콘텐츠를 넣습니다.-->
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- 푸터 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.8"
+            android:background="#ffff00">
+
+            <Button
+                android:id="@+id/BT_INFO"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/footer_info"
+                android:onClick="showInfo"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_MYPAGE"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/footer_mypage"
+                android:onClick="showMypage"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_SETTINGS"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/footer_settings"
+                android:onClick="showSettings"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
