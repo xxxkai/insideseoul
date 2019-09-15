@@ -39,7 +39,6 @@ public class StartActivity extends AppCompatActivity {
         timer.postDelayed(new Runnable(){
             public void run(){
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //Intent intent = new Intent(getApplicationContext(), TestActivity.class);
                 startActivity(intent);
                 finish();
             }

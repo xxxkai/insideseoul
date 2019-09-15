@@ -4,52 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99d8de"
+    android:background="#000"
     tools:context=".TestActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+       >
 
-        <FrameLayout
-            android:id="@+id/frame"
+        <ImageView
+            android:id="@+id/map_dummy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/map_dummy"
+            />
+
+        <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:onClick="bt1"
+            android:text="Button" />
 
-            <LinearLayout
-                android:id="@+id/test1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="test1"
-                android:text="Button1" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/test2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:onClick="test2"
-                    android:text="Button2" />
-            </LinearLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="bt2"
+            android:text="Button" />
 
-            <TextView
-                android:id="@+id/test3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="TextView" />
-
-
-
-
-        </FrameLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="bt3"
+            android:text="Button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

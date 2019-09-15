@@ -34,7 +34,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.74"
-                android:background="#00ff0000" />
+                android:background="#00ff0000"
+                android:onClick="goTest" />
 
             <Button
                 android:id="@+id/BT_HOME"

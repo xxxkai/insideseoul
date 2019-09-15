@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     static boolean graphic_mode = false;
-
+    Button logo_bt;
     Button home_bt;
     Button info_bt;
     Button mypage_bt;
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         home_bt = findViewById(R.id.BT_HOME);
         info_bt = findViewById(R.id.BT_INFO);
         mypage_bt = findViewById(R.id.BT_MYPAGE);
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void goTest(View v){
+        Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+        startActivity(intent);
+    }
 
     public void showMsg(String str){
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
