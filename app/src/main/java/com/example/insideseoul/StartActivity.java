@@ -20,21 +20,21 @@ public class StartActivity extends AppCompatActivity {
                 ImageView loading = findViewById(R.id.loading_img);
                 loading.setImageDrawable(getResources().getDrawable(R.drawable.loading_1));
             }
-        }, 700);
+        }, 400);
 
         timer.postDelayed(new Runnable(){
             public void run(){
                 ImageView loading = findViewById(R.id.loading_img);
                 loading.setImageDrawable(getResources().getDrawable(R.drawable.loading_2));
             }
-        }, 1400);
+        }, 800);
 
         timer.postDelayed(new Runnable(){
             public void run(){
                 ImageView loading = findViewById(R.id.loading_img);
                 loading.setImageDrawable(getResources().getDrawable(R.drawable.loading_3));
             }
-        }, 2100);
+        }, 1200);
 
         timer.postDelayed(new Runnable(){
             public void run(){
@@ -43,7 +43,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2500);
+        }, 1500);
 
     }
 }
