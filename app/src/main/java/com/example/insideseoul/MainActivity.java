@@ -22,9 +22,24 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout contents_frame;
     LinearLayout contents[];
 
-    int[] contents_list = {R.id.graphic_view, R.id.category_view};
+    int[] contents_list = { R.id.graphic_view, R.id.category_view,
+                            R.id.help_view, R.id.settings_view,
+                            R.id.mypage_view, R.id.dummy_view};
+    public enum CONTENTS_INDEX {
+        GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
+        HELP_VIEW(2), SETTINGS_VIEW(3),
+        MYPAGE_VIEW(4), DUMMY_VIEW(5);
+        private int value;
+        private CONTENTS_INDEX(int value) {
+            this.value = value;
+        }
+        public int getValue() {
+            return value;
+        }
+    };
+    CONTENTS_INDEX contents_index;
     int[] catid_list = {   R.id.BT_CAT1, R.id.BT_CAT2, R.id.BT_CAT3, R.id.BT_CAT4,
-            R.id.BT_CAT5, R.id.BT_CAT6, R.id.BT_CAT7, R.id.BT_CAT8};
+                          R.id.BT_CAT5, R.id.BT_CAT6, R.id.BT_CAT7, R.id.BT_CAT8};
     String[] catName = {  "모든",   "교통",   "안전",   "주택",
                           "경제",   "환경",   "환경",   "복지"};
 
@@ -45,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < contents_list.length; i++) {
             contents[i] = findViewById(contents_list[i]);
         }
-        for(int i = 1; i < contents_list.length; i++) {
-            contents[i].setVisibility(View.GONE);
-        }
+        onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
+
         for(int i = 0; i < catid_list.length; i++) {
             cat[i] = findViewById(catid_list[i]);
             //cat[i].setText(catName[i]);
@@ -62,29 +76,31 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
 
+    private void onlyOneVisible(int index){
+        for(int i = 0; i < contents.length; i++)
+            contents[i].setVisibility(View.GONE);
+        contents[index].setVisibility(View.VISIBLE);
+    }
+
     public void changeMode(View v){
         if(graphic_mode) {
             showMsg("그래픽 보기로 이동합니다.");
-            contents[0].setVisibility(View.VISIBLE);
-            contents[1].setVisibility(View.GONE);
+            onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
         }else {
             showMsg("카테고리 보기로 이동합니다.");
-            contents[0].setVisibility(View.GONE);
-            contents[1].setVisibility(View.VISIBLE);
+            onlyOneVisible(contents_index.CATEGORY_VIEW.getValue());
         }
         graphic_mode = !graphic_mode;
     }
 
     public void goHome(View v){
         showMsg("홈 화면으로 이동합니다.");
-        /*
-        contents_frame.removeViewAt(0);
-        LinearLayout dummy = findViewById(R.id.dummy_view);
-        contents_frame.addView(dummy);
-        */
+        graphic_mode = false;
+        onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
     }
-    public void showInfo(View v){
-        showMsg("준비중입니다.");
+    public void showHelp(View v){
+        showMsg("도움말 화면으로 이동합니다.");
+        onlyOneVisible(contents_index.HELP_VIEW.getValue());
     }
     public void showMypage(View v){
         Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
@@ -92,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void showSettings(View v){
-        showMsg("준비중입니다.");
+        showMsg("설정 화면으로 이동합니다.");
+        onlyOneVisible(contents_index.SETTINGS_VIEW.getValue());
     }
     public void goCategory(View v){
         int index = 0;

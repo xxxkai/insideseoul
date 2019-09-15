@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- 콘텐츠 라인 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BT_CAT1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_CAT2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!-- 콘텐츠 라인 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BT_CAT3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_CAT4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!-- 콘텐츠 라인 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BT_CAT5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_CAT6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!-- 콘텐츠 라인 4 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BT_CAT7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BT_CAT8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/test_icon"
+                android:onClick="goCategory"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
