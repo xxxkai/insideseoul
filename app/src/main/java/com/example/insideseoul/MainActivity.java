@@ -3,10 +3,12 @@ package com.example.insideseoul;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,11 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     int[] contents_list = { R.id.graphic_view, R.id.category_view,
                             R.id.help_view, R.id.settings_view,
-                            R.id.mypage_view, R.id.dummy_view};
+                            R.id.mypage_view, R.id.contract_view,
+                            R.id.language_view, R.id.dummy_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
         HELP_VIEW(2), SETTINGS_VIEW(3),
-        MYPAGE_VIEW(4), DUMMY_VIEW(5);
+        MYPAGE_VIEW(4), CONTRACT_VIEW(5),
+        LANGUAGE_VIEW(6), DUMMY_VIEW(7);
         private int value;
         private CONTENTS_INDEX(int value) {
             this.value = value;
@@ -91,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
         if(graphic_mode) {
             showMsg("그래픽 보기로 이동합니다.");
             onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
+            ImageView img[] = new ImageView[3];
+            img[0] = findViewById(R.id.map_dummy1);
+            img[1] = findViewById(R.id.map_dummy2);
+            img[2] = findViewById(R.id.map_dummy3);
+            img[0].setColorFilter(Color.parseColor("#99d8de"));
+            img[1].setColorFilter(Color.parseColor("#23b6b6"));
+            img[2].setColorFilter(Color.parseColor("#089e9a"));
+
         }else {
             showMsg("카테고리 보기로 이동합니다.");
             onlyOneVisible(contents_index.CATEGORY_VIEW.getValue());
@@ -115,6 +127,16 @@ public class MainActivity extends AppCompatActivity {
     public void showSettings(View v){
         showMsg("설정 화면으로 이동합니다.");
         onlyOneVisible(contents_index.SETTINGS_VIEW.getValue());
+    }
+
+    public void showContract(View v){
+        showMsg("약관 화면으로 이동합니다.");
+        onlyOneVisible(contents_index.CONTRACT_VIEW.getValue());
+    }
+
+    public void goLanguageSetting(View v){
+        showMsg("언어 설정 화면으로 이동합니다.");
+        onlyOneVisible(contents_index.LANGUAGE_VIEW.getValue());
     }
     public void goCategory(View v){
         int index = 0;

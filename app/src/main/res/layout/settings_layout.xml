@@ -2,13 +2,127 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="설정"
-        android:textSize="100dp"
         android:textStyle="bold"
-        android:gravity="center"
-        />
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#99d8de"
+            />
+        <!-- 첫번째 메뉴 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+           <Button
+               android:onClick="showContract"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00ff0000"
+                 />
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
+
+
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#dff2f4"
+                android:text=" 약관 동의"
+                android:textColor="#515252"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="#99d8de"
+                />
+
+             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00ff0000"
+                android:textColor="#515252"
+                android:text=" 약관에 동의한 서비스 사용 확인을 변경할 수 있습니다."
+                android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <!-- 첫번째 메뉴 -->
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#99d8de"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#99d8de"
+            />
+        <!-- 두번째 메뉴 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <Button
+                android:onClick="goLanguageSetting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00ff0000"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#dff2f4"
+                    android:textColor="#515252"
+                    android:text=" 언어 설정"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+                <View
+                    android:layout_height="2dp"
+                    android:layout_width="match_parent"
+                    android:background="#99d8de"
+                />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#515252"
+                    android:background="#00ff0000"
+                    android:text=" 언어 설정을 변경합니다."
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <!-- 두번째 메뉴 -->
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#99d8de"
+            />
+
+    </LinearLayout>
 </LinearLayout>
