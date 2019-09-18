@@ -8,8 +8,9 @@
         android:label="IN서울"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".CreatorsActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
+        <activity android:name=".CreatorsActivity"/>
         <activity android:name=".MypageActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".TestActivity" />

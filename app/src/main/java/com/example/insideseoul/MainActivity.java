@@ -1,6 +1,7 @@
 package com.example.insideseoul;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     static boolean graphic_mode = false;
-    Button logo_bt;
+    Button change_bt;
     Button home_bt;
     Button info_bt;
     Button mypage_bt;
@@ -23,16 +24,19 @@ public class MainActivity extends AppCompatActivity {
     Button cat[];
     FrameLayout contents_frame;
     LinearLayout contents[];
+    int priv_view;
 
     int[] contents_list = { R.id.graphic_view, R.id.category_view,
+                            R.id.graphic_view2, R.id.graphic_view3,
                             R.id.help_view, R.id.settings_view,
                             R.id.mypage_view, R.id.contract_view,
                             R.id.language_view, R.id.dummy_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
-        HELP_VIEW(2), SETTINGS_VIEW(3),
-        MYPAGE_VIEW(4), CONTRACT_VIEW(5),
-        LANGUAGE_VIEW(6), DUMMY_VIEW(7);
+        GRAPHIC_VIEW2(2), GRAPHIC_VIEW3(3),
+        HELP_VIEW(4), SETTINGS_VIEW(5),
+        MYPAGE_VIEW(6), CONTRACT_VIEW(7),
+        LANGUAGE_VIEW(8), DUMMY_VIEW(9);
         private int value;
         private CONTENTS_INDEX(int value) {
             this.value = value;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        change_bt = findViewById(R.id.BT_CHANGE);
         home_bt = findViewById(R.id.BT_HOME);
         info_bt = findViewById(R.id.BT_INFO);
         mypage_bt = findViewById(R.id.BT_MYPAGE);
@@ -69,16 +74,23 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < catid_list.length; i++) {
             cat[i] = findViewById(catid_list[i]);
-            //cat[i].setText(catName[i]);
         }
+
 
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
     }
 
+    public void onBackPressed(){
+        return; // 뒤로 가기로 종료할 수 없음
+    }
+
     public void goTest(View v){
+        /*
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
+        */
+        onlyOneVisible(priv_view);
     }
 
     public void showMsg(String str){
@@ -86,8 +98,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onlyOneVisible(int index){
-        for(int i = 0; i < contents.length; i++)
+        for(int i = 0; i < contents.length; i++) {
+            if(contents[i].getVisibility() == View.VISIBLE)
+                priv_view = i; // 이전 뷰를 기억한다.
             contents[i].setVisibility(View.GONE);
+        }
+        // 뒤로 가기 및 보기 모드 처리
+        if(index == contents_index.GRAPHIC_VIEW.getValue() || index == contents_index.CATEGORY_VIEW.getValue()) {
+            change_bt.setBackground(ContextCompat.getDrawable(this, R.drawable.header_change));
+            change_bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changeMode(null);
+                }
+            });
+        }else {
+            change_bt.setBackground(ContextCompat.getDrawable(this, R.drawable.header_back));
+            change_bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onlyOneVisible(priv_view);
+                }
+            });
+        }
         contents[index].setVisibility(View.VISIBLE);
     }
 
@@ -95,14 +128,6 @@ public class MainActivity extends AppCompatActivity {
         if(graphic_mode) {
             showMsg("그래픽 보기로 이동합니다.");
             onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
-            ImageView img[] = new ImageView[3];
-            img[0] = findViewById(R.id.map_dummy1);
-            img[1] = findViewById(R.id.map_dummy2);
-            img[2] = findViewById(R.id.map_dummy3);
-            img[0].setColorFilter(Color.parseColor("#99d8de"));
-            img[1].setColorFilter(Color.parseColor("#23b6b6"));
-            img[2].setColorFilter(Color.parseColor("#089e9a"));
-
         }else {
             showMsg("카테고리 보기로 이동합니다.");
             onlyOneVisible(contents_index.CATEGORY_VIEW.getValue());
@@ -110,6 +135,30 @@ public class MainActivity extends AppCompatActivity {
         graphic_mode = !graphic_mode;
     }
 
+    public void viewMap1(View v){
+        showMsg("서울시 북부 목록을 표시합니다.");
+        onlyOneVisible(contents_index.GRAPHIC_VIEW2.getValue());
+        ImageView img[] = new ImageView[3];
+        img[0] = findViewById(R.id.map_dummy1);
+        img[1] = findViewById(R.id.map_dummy2);
+        img[2] = findViewById(R.id.map_dummy3);
+        img[0].setColorFilter(Color.parseColor("#99d8de"));
+        img[1].setColorFilter(Color.parseColor("#23b6b6"));
+        img[2].setColorFilter(Color.parseColor("#089e9a"));
+
+    }
+
+    public void viewMap2(View v){
+        showMsg("서울시 남부 목록을 표시합니다.");
+        onlyOneVisible(contents_index.GRAPHIC_VIEW3.getValue());
+        ImageView img[] = new ImageView[3];
+        img[0] = findViewById(R.id.map_dummy4);
+        img[1] = findViewById(R.id.map_dummy5);
+        img[2] = findViewById(R.id.map_dummy6);
+        img[0].setColorFilter(Color.parseColor("#99d8de"));
+        img[1].setColorFilter(Color.parseColor("#23b6b6"));
+        img[2].setColorFilter(Color.parseColor("#089e9a"));
+    }
     public void goHome(View v){
         showMsg("홈 화면으로 이동합니다.");
         graphic_mode = false;

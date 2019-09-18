@@ -23,6 +23,7 @@
             android:background="@drawable/header_title">
 
             <Button
+                android:id="@+id/BT_CHANGE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.13"
@@ -79,6 +80,21 @@
                         android:layout_height="match_parent"
                         layout="@layout/graphic_layout"
                         />
+                    <!-- 그래픽 뷰 하위 1 -->
+                    <include
+                        android:id="@+id/graphic_view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/graphic_layout2"
+                        />
+
+                    <!-- 그래픽 뷰 하위 2 -->
+                    <include
+                        android:id="@+id/graphic_view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/graphic_layout3"
+                        />
 
                     <!-- 카테고리 뷰 -->
                     <include
@@ -125,6 +141,7 @@
                         android:layout_height="match_parent"
                         layout="@layout/language_layout"
                         />
+
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
                 </FrameLayout>
             </ScrollView>
