@@ -81,7 +81,7 @@
             android:layout_height="100dp">
 
             <Button
-                android:onClick="goLanguageSetting"
+                android:onClick="changeSystemLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00ff0000"

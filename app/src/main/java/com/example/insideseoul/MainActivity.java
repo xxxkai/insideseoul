@@ -1,13 +1,16 @@
 package com.example.insideseoul;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBackPressed(){
-        return; // 뒤로 가기로 종료할 수 없음
+        onlyOneVisible(priv_view);
     }
 
     public void goTest(View v){
@@ -116,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
             change_bt.setBackground(ContextCompat.getDrawable(this, R.drawable.header_back));
             change_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    onlyOneVisible(priv_view);
+                public void onClick(View view) { onlyOneVisible(priv_view);
                 }
             });
         }
@@ -169,8 +171,32 @@ public class MainActivity extends AppCompatActivity {
         onlyOneVisible(contents_index.HELP_VIEW.getValue());
     }
     public void showMypage(View v){
-        Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
-        startActivity(intent);
+
+        final EditText pw_input = new EditText(this);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setView(pw_input);
+        alert.setTitle("비밀번호 입력");
+        alert.setMessage("비밀번호를 입력해주십시오");
+
+        alert.setPositiveButton("입력",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getApplicationContext(),pw_input.getText().toString() ,Toast.LENGTH_LONG).show();
+                        // hash_pw = H(pw+slat)
+                        // Compare(hash_pw, stored_hash_pw)
+                        // Processing
+                        onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
+                    }
+                });
+        alert.setNegativeButton("뒤로가기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //MainActivity.super.onBackPressed();
+                    }
+                });
+
+        alert.show();
 
     }
     public void showSettings(View v){
@@ -195,6 +221,23 @@ public class MainActivity extends AppCompatActivity {
 
          showMsg(catName[index] + " 분야로 이동합니다.");
          // 해당 카테고리로 이동
+    }
+    public void changeSystemLanguage(View v){
+
+        final CharSequence[] lang = {"한국어", "영어", "일본어"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("사용할 언어를 선택해주세요.");
+        builder.setSingleChoiceItems(lang, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                showMsg(lang[i].toString()+"를 선택하셨습니다.");
+            }
+        }).setNeutralButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).show();
     }
 
 }
