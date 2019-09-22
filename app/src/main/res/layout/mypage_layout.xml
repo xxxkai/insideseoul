@@ -86,9 +86,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#99d8dd"
-                android:textStyle="bold"
+                android:text="관심지역"
                 android:textSize="30dp"
-                android:text="이벤트" />
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="4dp"
@@ -102,9 +102,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#99d8dd"
-                android:textStyle="bold"
+                android:text="좋아요"
                 android:textSize="30dp"
-                android:text="스크랩" />
+                android:textStyle="bold" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"

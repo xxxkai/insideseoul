@@ -9,6 +9,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -25,21 +29,22 @@ public class MainActivity extends AppCompatActivity {
     Button settings_bt;
     Button title_bt;
     Button cat[];
+    WebView webview;
     FrameLayout contents_frame;
     LinearLayout contents[];
     int priv_view;
 
     int[] contents_list = { R.id.graphic_view, R.id.category_view,
                             R.id.graphic_view2, R.id.graphic_view3,
-                            R.id.help_view, R.id.settings_view,
-                            R.id.mypage_view, R.id.contract_view,
-                            R.id.language_view, R.id.dummy_view};
+                            R.id.settings_view, R.id.mypage_view,
+                            R.id.language_view, R.id.signup_view,
+                            R.id.web_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
         GRAPHIC_VIEW2(2), GRAPHIC_VIEW3(3),
-        HELP_VIEW(4), SETTINGS_VIEW(5),
-        MYPAGE_VIEW(6), CONTRACT_VIEW(7),
-        LANGUAGE_VIEW(8), DUMMY_VIEW(9);
+        SETTINGS_VIEW(4), MYPAGE_VIEW(5),
+        LANGUAGE_VIEW(6), SIGNUP_VIEW(7),
+        WEB_VIEW(8);
         private int value;
         private CONTENTS_INDEX(int value) {
             this.value = value;
@@ -68,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         title_bt = findViewById(R.id.BT_TITLE);
         contents_frame = findViewById(R.id.CONTENTS);
         contents = new LinearLayout[contents_list.length];
+        webview = findViewById(R.id.web);
         cat = new Button[catid_list.length];
+
 
         for(int i = 0; i < contents_list.length; i++) {
             contents[i] = findViewById(contents_list[i]);
@@ -88,12 +95,17 @@ public class MainActivity extends AppCompatActivity {
         onlyOneVisible(priv_view);
     }
 
+    private void goURL(String url){
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.setWebViewClient(new WebViewClient());
+        webview.loadUrl(url);
+    }
     public void goTest(View v){
-        /*
+
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
-        */
-        onlyOneVisible(priv_view);
+
+        //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
     }
 
     public void showMsg(String str){
@@ -143,10 +155,9 @@ public class MainActivity extends AppCompatActivity {
         ImageView img[] = new ImageView[3];
         img[0] = findViewById(R.id.map_dummy1);
         img[1] = findViewById(R.id.map_dummy2);
-        img[2] = findViewById(R.id.map_dummy3);
-        img[0].setColorFilter(Color.parseColor("#99d8de"));
+//        img[0].setColorFilter(Color.parseColor("#99d8de"));
         img[1].setColorFilter(Color.parseColor("#23b6b6"));
-        img[2].setColorFilter(Color.parseColor("#089e9a"));
+//        img[2].setColorFilter(Color.parseColor("#089e9a"));
 
     }
 
@@ -168,7 +179,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void showHelp(View v){
         showMsg("도움말 화면으로 이동합니다.");
-        onlyOneVisible(contents_index.HELP_VIEW.getValue());
+        onlyOneVisible(contents_index.WEB_VIEW.getValue());
+        goURL("https://www.naver.com");
     }
     public void showMypage(View v){
 
@@ -206,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void showContract(View v){
         showMsg("약관 화면으로 이동합니다.");
-        onlyOneVisible(contents_index.CONTRACT_VIEW.getValue());
+        onlyOneVisible(contents_index.WEB_VIEW.getValue());
+        goURL("https://www.google.com");
     }
 
     public void goLanguageSetting(View v){

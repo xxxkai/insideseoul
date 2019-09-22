@@ -65,14 +65,6 @@
                     android:layout_height="match_parent">
 
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
-                    <!-- 더미 콘텐츠 -->
-                    <include
-                        android:id="@+id/dummy_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/dummy_layout"
-                        />
-
                     <!-- 그래픽 뷰 -->
                     <include
                         android:id="@+id/graphic_view"
@@ -104,14 +96,6 @@
                         layout="@layout/category_layout"
                         />
 
-                    <!-- 헬프 뷰 -->
-                    <include
-                        android:id="@+id/help_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/help_layout"
-                        />
-
                     <!-- 세팅 뷰 -->
                     <include
                         android:id="@+id/settings_view"
@@ -127,19 +111,26 @@
                         android:layout_height="match_parent"
                         layout="@layout/mypage_layout"
                         />
-                    <!-- 약관 뷰 -->
-                    <include
-                        android:id="@+id/contract_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/contract_layout"
-                        />
                     <!-- 언어 설정 뷰 -->
                     <include
                         android:id="@+id/language_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         layout="@layout/language_layout"
+                        />
+                    <!-- 회원가입 뷰 -->
+                    <include
+                        android:id="@+id/signup_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/signup_layout"
+                        />
+                    <!-- 웹 뷰 -->
+                    <include
+                        android:id="@+id/web_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/web_layout"
                         />
 
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->

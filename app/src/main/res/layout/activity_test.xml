@@ -8,38 +8,17 @@
     tools:context=".TestActivity">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-       >
-
-        <ImageView
-            android:id="@+id/map_dummy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/map_dummy1"
-            />
-
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="bt1"
-            android:text="Button" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="bt2"
-            android:text="Button" />
+            <WebView
+                android:id="@+id/web_dummy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </WebView>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="bt3"
-            android:text="Button" />
-    </LinearLayout>
+        </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
