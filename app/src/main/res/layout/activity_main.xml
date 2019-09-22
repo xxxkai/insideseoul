@@ -74,7 +74,7 @@
                         />
                     <!-- 그래픽 뷰 하위 1 -->
                     <include
-                        android:id="@+id/graphic_view2"
+                        android:id="@+id/map_view1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         layout="@layout/map1_layout"
@@ -82,7 +82,7 @@
 
                     <!-- 그래픽 뷰 하위 2 -->
                     <include
-                        android:id="@+id/graphic_view3"
+                        android:id="@+id/map_view2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         layout="@layout/map2_layout"

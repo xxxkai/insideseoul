@@ -5,13 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -37,15 +33,44 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout contents_frame;
     LinearLayout contents[];
     int priv_view;
-
+    int[] icon_ids = { 	R.id.local_00, R.id.local_01, R.id.local_02, R.id.local_03, R.id.local_04,
+                        R.id.local_05, R.id.local_06, R.id.local_07, R.id.local_08, R.id.local_09,
+                        R.id.local_10, R.id.local_11, R.id.local_12, R.id.local_13, R.id.local_14,
+                        R.id.local_15, R.id.local_16, R.id.local_17, R.id.local_18, R.id.local_19,
+                        R.id.local_20, R.id.local_21, R.id.local_22, R.id.local_23, R.id.local_24
+    };
+    int[] alert_ids = { 	R.id.local_alert_00, R.id.local_alert_01, R.id.local_alert_02, R.id.local_alert_03, R.id.local_alert_04,
+                            R.id.local_alert_05, R.id.local_alert_06, R.id.local_alert_07, R.id.local_alert_08, R.id.local_alert_09,
+                            R.id.local_alert_10, R.id.local_alert_11, R.id.local_alert_12, R.id.local_alert_13, R.id.local_alert_14,
+                            R.id.local_alert_15, R.id.local_alert_16, R.id.local_alert_17, R.id.local_alert_18, R.id.local_alert_19,
+                            R.id.local_alert_20, R.id.local_alert_21, R.id.local_alert_22, R.id.local_alert_23, R.id.local_alert_24
+    };
+    int[] img_ids = { 	R.id.local_img_00, R.id.local_img_01, R.id.local_img_02, R.id.local_img_03, R.id.local_img_04,
+                        R.id.local_img_05, R.id.local_img_06, R.id.local_img_07, R.id.local_img_08, R.id.local_img_09,
+                        R.id.local_img_10, R.id.local_img_11, R.id.local_img_12, R.id.local_img_13, R.id.local_img_14,
+                        R.id.local_img_15, R.id.local_img_16, R.id.local_img_17, R.id.local_img_18, R.id.local_img_19,
+                        R.id.local_img_20, R.id.local_img_21, R.id.local_img_22, R.id.local_img_23, R.id.local_img_24
+    };
+    int[] img_drawables = { 	R.drawable.map_00, R.drawable.map_01, R.drawable.map_02, R.drawable.map_03, R.drawable.map_04,
+                                R.drawable.map_05, R.drawable.map_06, R.drawable.map_07, R.drawable.map_08, R.drawable.map_09,
+                                R.drawable.map_10, R.drawable.map_11, R.drawable.map_12, R.drawable.map_13, R.drawable.map_14,
+                                R.drawable.map_15, R.drawable.map_16, R.drawable.map_17, R.drawable.map_18, R.drawable.map_19,
+                                R.drawable.map_20, R.drawable.map_21, R.drawable.map_22, R.drawable.map_23, R.drawable.map_24
+    };
+    int[] name_ids = { 	R.id.local_name_00, R.id.local_name_01, R.id.local_name_02, R.id.local_name_03, R.id.local_name_04,
+                        R.id.local_name_05, R.id.local_name_06, R.id.local_name_07, R.id.local_name_08, R.id.local_name_09,
+                        R.id.local_name_10, R.id.local_name_11, R.id.local_name_12, R.id.local_name_13, R.id.local_name_14,
+                        R.id.local_name_15, R.id.local_name_16, R.id.local_name_17, R.id.local_name_18, R.id.local_name_19,
+                        R.id.local_name_20, R.id.local_name_21, R.id.local_name_22, R.id.local_name_23, R.id.local_name_24
+    };
     int[] contents_list = { R.id.graphic_view, R.id.category_view,
-                            R.id.graphic_view2, R.id.graphic_view3,
+                            R.id.map_view1, R.id.map_view2,
                             R.id.settings_view, R.id.mypage_view,
                             R.id.language_view, R.id.signup_view,
                             R.id.web_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
-        GRAPHIC_VIEW2(2), GRAPHIC_VIEW3(3),
+        MAP_VIEW1(2), MAP_VIEW2(3),
         SETTINGS_VIEW(4), MYPAGE_VIEW(5),
         LANGUAGE_VIEW(6), SIGNUP_VIEW(7),
         WEB_VIEW(8);
@@ -155,47 +180,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewMap1(View v){
         showMsg("서울시 북부 목록을 표시합니다.");
-        onlyOneVisible(contents_index.GRAPHIC_VIEW2.getValue());
-        int[] icon_ids = { 	R.id.local_00, R.id.local_01, R.id.local_02, R.id.local_03, R.id.local_04,
-                            R.id.local_05, R.id.local_06, R.id.local_07, R.id.local_08, R.id.local_09,
-                            R.id.local_10, R.id.local_11, R.id.local_12, R.id.local_13,
-                            /* R.id.local_14,
-                            R.id.local_15, R.id.local_16, R.id.local_17, R.id.local_18, R.id.local_19,
-                            R.id.local_20, R.id.local_21, R.id.local_22, R.id.local_23, R.id.local_24*/
-                            };
-        int[] alert_ids = { 	R.id.local_alert_00, R.id.local_alert_01, R.id.local_alert_02, R.id.local_alert_03, R.id.local_alert_04,
-                                R.id.local_alert_05, R.id.local_alert_06, R.id.local_alert_07, R.id.local_alert_08, R.id.local_alert_09,
-                                R.id.local_alert_10, R.id.local_alert_11, R.id.local_alert_12, R.id.local_alert_13,
-                                /* R.id.local_alert_14,
-                                R.id.local_alert_15, R.id.local_alert_16, R.id.local_alert_17, R.id.local_alert_18, R.id.local_alert_19,
-                                R.id.local_alert_20, R.id.local_alert_21, R.id.local_alert_22, R.id.local_alert_23, R.id.local_alert_24*/
-                             };
-        int[] img_ids = { 	R.id.local_img_00, R.id.local_img_01, R.id.local_img_02, R.id.local_img_03, R.id.local_img_04,
-                            R.id.local_img_05, R.id.local_img_06, R.id.local_img_07, R.id.local_img_08, R.id.local_img_09,
-                            R.id.local_img_10, R.id.local_img_11, R.id.local_img_12, R.id.local_img_13,
-                            /* R.id.local_img_14,
-                            R.id.local_img_15, R.id.local_img_16, R.id.local_img_17, R.id.local_img_18, R.id.local_img_19,
-                            R.id.local_img_20, R.id.local_img_21, R.id.local_img_22, R.id.local_img_23, R.id.local_img_24*/
-        };
-        int[] img_drawables = { 	R.drawable.map_00, R.drawable.map_01, R.drawable.map_02, R.drawable.map_03, R.drawable.map_04,
-                                    R.drawable.map_05, R.drawable.map_06, R.drawable.map_07, R.drawable.map_08, R.drawable.map_09,
-                                    R.drawable.map_10, R.drawable.map_11, R.drawable.map_12, R.drawable.map_13,
-                                    /* R.drawable.map_14,
-                                    R.drawable.map_15, R.drawable.map_16, R.drawable.map_17, R.drawable.map_18, R.drawable.map_19,
-                                    R.drawable.map_20, R.drawable.map_21, R.drawable.map_22, R.drawable.map_23, R.drawable.map_24*/
-        };
-        int[] name_ids = { 	R.id.local_name_00, R.id.local_name_01, R.id.local_name_02, R.id.local_name_03, R.id.local_name_04,
-                            R.id.local_name_05, R.id.local_name_06, R.id.local_name_07, R.id.local_name_08, R.id.local_name_09,
-                            R.id.local_name_10, R.id.local_name_11, R.id.local_name_12, R.id.local_name_13,
-                            /* R.id.local_name_14,
-                            R.id.local_name_15, R.id.local_name_16, R.id.local_name_17, R.id.local_name_18, R.id.local_name_19,
-                            R.id.local_name_20, R.id.local_name_21, R.id.local_name_22, R.id.local_name_23, R.id.local_name_24*/
-        };
+        onlyOneVisible(contents_index.MAP_VIEW1.getValue());
 
-        LinearLayout[] icons = new LinearLayout[icon_ids.length];
-        Button[] alerts = new Button[alert_ids.length];
-        ImageView[] map_imgs = new ImageView[img_ids.length];
-        TextView[] names = new TextView[name_ids.length];
+        LinearLayout[] icons = new LinearLayout[GraphicLayout.getLocalCount('n')];
+        Button[] alerts = new Button[GraphicLayout.getLocalCount('n')];
+        ImageView[] map_imgs = new ImageView[GraphicLayout.getLocalCount('n')];
+        TextView[] names = new TextView[GraphicLayout.getLocalCount('n')];
 
         Random rand = new Random();
         int alert_num = 0;
@@ -222,7 +212,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewMap2(View v){
         showMsg("서울시 남부 목록을 표시합니다.");
+        onlyOneVisible(contents_index.MAP_VIEW2.getValue());
 
+        LinearLayout[] icons = new LinearLayout[GraphicLayout.getLocalCount('s')];
+        Button[] alerts = new Button[GraphicLayout.getLocalCount('s')];
+        ImageView[] map_imgs = new ImageView[GraphicLayout.getLocalCount('s')];
+        TextView[] names = new TextView[GraphicLayout.getLocalCount('s')];
+
+        Random rand = new Random();
+        int alert_num = 0;
+        int congestion = 0;
+        int offset = GraphicLayout.getLocalCount('n');
+
+        for(int i = 0; i < icons.length; i++) {
+            icons[i] = findViewById(icon_ids[i+offset]);
+            alerts[i] = findViewById(alert_ids[i+offset]);
+            map_imgs[i] = findViewById(img_ids[i+offset]);
+            names[i] = findViewById(name_ids[i+offset]);
+
+            alert_num = rand.nextInt()%5;
+            congestion = rand.nextInt()%3;
+            alert_num = (alert_num<0)?(alert_num*-1):alert_num;
+            congestion = (congestion<0)?((congestion*-1)):(congestion);
+
+            alerts[i].setText(""+alert_num);
+            names[i].setText(GraphicLayout.getName(i+offset));
+            map_imgs[i].setImageDrawable(getResources().getDrawable(img_drawables[i+offset], getApplicationContext().getTheme()));
+            map_imgs[i].setColorFilter(Color.parseColor(GraphicLayout.Colors[congestion]));
+        }
     }
     public void goHome(View v){
         showMsg("홈 화면으로 이동합니다.");

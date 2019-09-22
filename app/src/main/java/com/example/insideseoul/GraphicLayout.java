@@ -19,6 +19,14 @@ public class GraphicLayout {
             // <<<여유 - 혼잡>>>
             "#99d8de", "#23b6b6", "#089e9a"
     };
+    public static int getLocalCount(char direction){
+        if(direction == 'n')
+            return 14;
+        else if(direction == 's')
+            return 11;
+        else
+            return -1;
+    }
 
     public static String getName(int index){
         return Local_Names[index];
