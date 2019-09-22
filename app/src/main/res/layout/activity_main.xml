@@ -77,7 +77,7 @@
                         android:id="@+id/graphic_view2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        layout="@layout/graphic_layout2"
+                        layout="@layout/map1_layout"
                         />
 
                     <!-- 그래픽 뷰 하위 2 -->
@@ -85,7 +85,7 @@
                         android:id="@+id/graphic_view3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        layout="@layout/graphic_layout3"
+                        layout="@layout/map2_layout"
                         />
 
                     <!-- 카테고리 뷰 -->
@@ -93,7 +93,7 @@
                         android:id="@+id/category_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        layout="@layout/category_layout"
+                        layout="@layout/map_all_layout"
                         />
 
                     <!-- 세팅 뷰 -->
