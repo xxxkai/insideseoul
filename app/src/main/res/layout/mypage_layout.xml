@@ -10,6 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="800dp"
         android:orientation="vertical">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,44 +25,49 @@
                 android:id="@+id/BT_LOGOUT"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:background="#f1f1f1"
-                android:text="로그아웃"
-                android:textStyle="bold" />
+                android:background="@drawable/mp_logout" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#99d8de"
-            />
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:srcCompat="@drawable/dot_line"/>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="15"
             android:orientation="horizontal">
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="30"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/mp_profile" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="70"
                 android:orientation="vertical">
-
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"/>
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:text="김서울" />
-
                 <TextView
                     android:id="@+id/user_email"
                     android:layout_width="match_parent"
@@ -68,11 +76,9 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#99d8de"
-            />
+            android:layout_height="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,14 +87,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/BT_EVENT"
-                android:layout_width="wrap_content"
+                android:id="@+id/BT_FAVORITE"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#99d8dd"
-                android:text="관심지역"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                android:background="@drawable/mp_favorite"
+                 />
 
             <View
                 android:layout_width="4dp"
@@ -97,28 +101,23 @@
                 />
 
             <Button
-                android:id="@+id/BT_SCRAPED"
-                android:layout_width="wrap_content"
+                android:id="@+id/BT_LIKEIT"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#99d8dd"
-                android:text="좋아요"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                android:background="@drawable/mp_likeit"
+                 />
         </LinearLayout>
-        <View
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#99d8de"
-            />
+            android:layout_height="50dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="60"
+            android:layout_weight="55"
             android:orientation="vertical">
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -128,22 +127,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
-
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"/>
                 <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/mp_c"
+                    android:layout_gravity="center"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
-                    app:srcCompat="@drawable/test_icon" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:text="이용약관" />
-
+                    android:background="#00ff0000"
+                    android:textAlignment="viewStart"
+                    android:textColor="#767576 "
+                    android:textSize="18dp"
+                    android:text="이용약관"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -154,22 +156,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
-
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"/>
                 <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/mp_qna"
+                    android:layout_gravity="center"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
-                    app:srcCompat="@drawable/test_icon" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:text="자주 묻는 질문" />
-
+                    android:background="#00ff0000"
+                    android:textAlignment="viewStart"
+                    android:textColor="#767576 "
+                    android:textSize="18dp"
+                    android:text="자주 묻는 질문"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -180,22 +185,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
-
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"/>
                 <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/mp_q"
+                    android:layout_gravity="center"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
-                    app:srcCompat="@drawable/test_icon" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:text="문의하기" />
-
+                    android:background="#00ff0000"
+                    android:textAlignment="viewStart"
+                    android:textColor="#767576 "
+                    android:textSize="18dp"
+                    android:text="문의하기"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -203,6 +211,5 @@
                 android:background="#99d8de"
                 />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

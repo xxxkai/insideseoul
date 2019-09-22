@@ -34,7 +34,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/map_dummy0" />
+                        app:srcCompat="@drawable/map_24" />
 
                     <Button
                         android:layout_width="30dp"
@@ -79,7 +79,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/map_dummy3" />
+                        app:srcCompat="@drawable/map_23" />
 
                     <Button
                         android:layout_width="30dp"

@@ -101,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         webview.loadUrl(url);
     }
     public void goTest(View v){
-
+/*
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
-
+*/
         //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
     }
 
@@ -155,22 +155,13 @@ public class MainActivity extends AppCompatActivity {
         ImageView img[] = new ImageView[3];
         img[0] = findViewById(R.id.map_dummy1);
         img[1] = findViewById(R.id.map_dummy2);
-//        img[0].setColorFilter(Color.parseColor("#99d8de"));
-        img[1].setColorFilter(Color.parseColor("#23b6b6"));
-//        img[2].setColorFilter(Color.parseColor("#089e9a"));
+
 
     }
 
     public void viewMap2(View v){
         showMsg("서울시 남부 목록을 표시합니다.");
-        onlyOneVisible(contents_index.GRAPHIC_VIEW3.getValue());
-        ImageView img[] = new ImageView[3];
-        img[0] = findViewById(R.id.map_dummy4);
-        img[1] = findViewById(R.id.map_dummy5);
-        img[2] = findViewById(R.id.map_dummy6);
-        img[0].setColorFilter(Color.parseColor("#99d8de"));
-        img[1].setColorFilter(Color.parseColor("#23b6b6"));
-        img[2].setColorFilter(Color.parseColor("#089e9a"));
+
     }
     public void goHome(View v){
         showMsg("홈 화면으로 이동합니다.");
