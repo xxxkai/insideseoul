@@ -38,7 +38,7 @@
                 <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#dff2f4"
+                android:background="#99d8de"
                 android:text=" 약관 동의"
                 android:textColor="#515252"
                 android:textSize="20dp"
@@ -69,7 +69,7 @@
             />
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="20dp" />
         <View
             android:layout_height="2dp"
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#dff2f4"
+                    android:background="#99d8de"
                     android:textColor="#515252"
                     android:text=" 언어 설정"
                     android:textSize="20dp"

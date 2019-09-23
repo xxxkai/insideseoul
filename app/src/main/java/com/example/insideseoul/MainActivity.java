@@ -67,13 +67,15 @@ public class MainActivity extends AppCompatActivity {
                             R.id.map_view1, R.id.map_view2,
                             R.id.settings_view, R.id.mypage_view,
                             R.id.language_view, R.id.signup_view,
-                            R.id.web_view, R.id.search_result_view};
+                            R.id.web_view, R.id.search_result_view,
+                            R.id.result_detail_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
         MAP_VIEW1(2), MAP_VIEW2(3),
         SETTINGS_VIEW(4), MYPAGE_VIEW(5),
         LANGUAGE_VIEW(6), SIGNUP_VIEW(7),
-        WEB_VIEW(8), SEARCH_RESULT_VIEW(8);
+        WEB_VIEW(8), SEARCH_RESULT_VIEW(9),
+        RESULT_DETAIL_VIEW(10);
 
         private int value;
         private CONTENTS_INDEX(int value) {
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
 */
-        onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+        onlyOneVisible(contents_index.RESULT_DETAIL_VIEW.getValue());
     }
 
     public void showMsg(String str){
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         showMsg("서울시 북부 목록을 표시합니다.");
         onlyOneVisible(contents_index.MAP_VIEW1.getValue());
 
-        LinearLayout[] icons = new LinearLayout[GraphicLayout.getLocalCount('n')];
+        final LinearLayout[] icons = new LinearLayout[GraphicLayout.getLocalCount('n')];
         Button[] alerts = new Button[GraphicLayout.getLocalCount('n')];
         ImageView[] map_imgs = new ImageView[GraphicLayout.getLocalCount('n')];
         TextView[] names = new TextView[GraphicLayout.getLocalCount('n')];
@@ -210,9 +212,17 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener clickListener = new View.OnClickListener(){
             public void onClick(View v){
-
+                int id = v.getId();
+                for(int i = 0; i < icon_ids.length; i++)
+                    if(icon_ids[i] == id)
+                        showMsg(GraphicLayout.getName(i) + "검색 결과");
+                        onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
             }
         };
+
+        for(int i = 0; i < icons.length; i++){
+            icons[i].setOnClickListener(clickListener);
+        }
 
     }
 
@@ -245,6 +255,20 @@ public class MainActivity extends AppCompatActivity {
             names[i].setText(GraphicLayout.getName(i+offset));
             map_imgs[i].setImageDrawable(getResources().getDrawable(img_drawables[i+offset], getApplicationContext().getTheme()));
             map_imgs[i].setColorFilter(Color.parseColor(GraphicLayout.Colors[congestion]));
+        }
+
+        View.OnClickListener clickListener = new View.OnClickListener(){
+            public void onClick(View v){
+                int id = v.getId();
+                for(int i = 0; i < icon_ids.length; i++)
+                    if(icon_ids[i] == id)
+                        showMsg(GraphicLayout.getName(i) + "검색 결과");
+                onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
+            }
+        };
+
+        for(int i = 0; i < icons.length; i++){
+            icons[i].setOnClickListener(clickListener);
         }
     }
     public void goHome(View v){
