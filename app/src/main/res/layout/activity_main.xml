@@ -132,6 +132,13 @@
                         android:layout_height="match_parent"
                         layout="@layout/web_layout"
                         />
+                    <!-- 이벤트 검색 결과 뷰 -->
+                    <include
+                        android:id="@+id/search_result_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/search_result_layout"
+                        />
 
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
                 </FrameLayout>

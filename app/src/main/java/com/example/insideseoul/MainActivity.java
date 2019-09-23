@@ -67,13 +67,14 @@ public class MainActivity extends AppCompatActivity {
                             R.id.map_view1, R.id.map_view2,
                             R.id.settings_view, R.id.mypage_view,
                             R.id.language_view, R.id.signup_view,
-                            R.id.web_view};
+                            R.id.web_view, R.id.search_result_view};
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
         MAP_VIEW1(2), MAP_VIEW2(3),
         SETTINGS_VIEW(4), MYPAGE_VIEW(5),
         LANGUAGE_VIEW(6), SIGNUP_VIEW(7),
-        WEB_VIEW(8);
+        WEB_VIEW(8), SEARCH_RESULT_VIEW(8);
+
         private int value;
         private CONTENTS_INDEX(int value) {
             this.value = value;
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             cat[i] = findViewById(catid_list[i]);
         }
 
-
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
     }
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
 */
-        //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+        onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
     }
 
     public void showMsg(String str){
@@ -207,6 +207,12 @@ public class MainActivity extends AppCompatActivity {
             map_imgs[i].setImageDrawable(getResources().getDrawable(img_drawables[i], getApplicationContext().getTheme()));
             map_imgs[i].setColorFilter(Color.parseColor(GraphicLayout.Colors[congestion]));
         }
+
+        View.OnClickListener clickListener = new View.OnClickListener(){
+            public void onClick(View v){
+
+            }
+        };
 
     }
 
