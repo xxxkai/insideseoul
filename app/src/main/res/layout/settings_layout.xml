@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +11,24 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환경 설정"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="center"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/dot_line" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
         <View
             android:layout_height="2dp"
             android:layout_width="match_parent"
@@ -22,7 +40,8 @@
             android:layout_height="100dp">
 
            <Button
-               android:onClick="showContract"
+               android:id="@+id/BT_CONTRACT2"
+               android:onClick="goWebView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00ff0000"

@@ -146,7 +146,13 @@
                         android:layout_height="match_parent"
                         layout="@layout/result_detail_layout"
                         />
-
+                    <!-- 이메일 문의 뷰 -->
+                    <include
+                        android:id="@+id/question_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/question_layout"
+                        />
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
                 </FrameLayout>
             </ScrollView>
@@ -166,7 +172,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/footer_info"
-                android:onClick="showHelp"
+                android:onClick="goWebView"
                 android:textStyle="bold" />
 
             <Button

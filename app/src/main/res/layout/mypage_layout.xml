@@ -139,6 +139,8 @@
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
                 <Button
+                    android:id="@+id/BT_CONTRACT"
+                    android:onClick="goWebView"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:background="#00ff0000"
@@ -168,6 +170,8 @@
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
                 <Button
+                    android:id="@+id/BT_FAQ"
+                    android:onClick="goWebView"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:background="#00ff0000"
@@ -197,6 +201,7 @@
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
                 <Button
+                    android:onClick="goQustion"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:background="#00ff0000"

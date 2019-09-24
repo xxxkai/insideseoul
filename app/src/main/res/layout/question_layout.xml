@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일 문의"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="center"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/dot_line" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="수신 이메일" />
+
+        <EditText
+            android:id="@+id/INPUT_RECEIVE_EMAIL"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@drawable/photo_frame"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="문의 내용"
+            />
+
+        <EditText
+            android:id="@+id/INPUT_SEND_MSG"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@drawable/photo_frame"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/button_frame"
+            android:onClick="notSupported"
+            android:text="보내기" />
+
+
+    </LinearLayout>
+</LinearLayout>

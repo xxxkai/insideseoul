@@ -68,14 +68,15 @@ public class MainActivity extends AppCompatActivity {
                             R.id.settings_view, R.id.mypage_view,
                             R.id.language_view, R.id.signup_view,
                             R.id.web_view, R.id.search_result_view,
-                            R.id.result_detail_view};
+                            R.id.result_detail_view, R.id.question_view};
+
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), CATEGORY_VIEW(1),
         MAP_VIEW1(2), MAP_VIEW2(3),
         SETTINGS_VIEW(4), MYPAGE_VIEW(5),
         LANGUAGE_VIEW(6), SIGNUP_VIEW(7),
         WEB_VIEW(8), SEARCH_RESULT_VIEW(9),
-        RESULT_DETAIL_VIEW(10);
+        RESULT_DETAIL_VIEW(10), QUESTION_VIEW(11);
 
         private int value;
         private CONTENTS_INDEX(int value) {
@@ -171,10 +172,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeMode(View v){
         if(graphic_mode) {
-            showMsg("그래픽 보기로 이동합니다.");
+            showMsg("구역별 보기로 이동합니다.");
             onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
         }else {
-            showMsg("카테고리 보기로 이동합니다.");
+            showMsg("전체 보기로 이동합니다.");
             onlyOneVisible(contents_index.CATEGORY_VIEW.getValue());
         }
         graphic_mode = !graphic_mode;
@@ -276,10 +277,22 @@ public class MainActivity extends AppCompatActivity {
         graphic_mode = false;
         onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
     }
-    public void showHelp(View v){
-        showMsg("도움말 화면으로 이동합니다.");
+    public void goWebView(View v){
         onlyOneVisible(contents_index.WEB_VIEW.getValue());
-        goURL("https://www.naver.com");
+        switch (v.getId()){
+            case R.id.BT_INFO :
+                goURL("https://www.google.com");
+                break;
+            case R.id.BT_CONTRACT :
+            case R.id.BT_CONTRACT2 :
+                goURL("https://www.daum.net");
+                break;
+            case R.id.BT_FAQ :
+                goURL("https://www.yahoo.com");
+                break;
+            default:
+                goURL("https://www.naver.com");
+        }
     }
     public void showMypage(View v){
 
@@ -321,10 +334,6 @@ public class MainActivity extends AppCompatActivity {
         goURL("https://www.google.com");
     }
 
-    public void goLanguageSetting(View v){
-        showMsg("언어 설정 화면으로 이동합니다.");
-        onlyOneVisible(contents_index.LANGUAGE_VIEW.getValue());
-    }
     public void goCategory(View v){
         int index = 0;
         for(;index<catid_list.length; index++)
@@ -347,9 +356,16 @@ public class MainActivity extends AppCompatActivity {
         }).setNeutralButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                notSupported(null);
                 dialogInterface.dismiss();
             }
         }).show();
-    }
 
+    }
+    public void notSupported(View v){
+        showMsg("해당 기능은 현재 버전에서 지원하지 않습니다.");
+    }
+    public void goQustion(View v){
+        onlyOneVisible(contents_index.QUESTION_VIEW.getValue());
+    }
 }
