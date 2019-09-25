@@ -1,3 +1,5 @@
+package com.example.insideseoul;
+
 import android.util.Base64;
 
 import java.security.MessageDigest;

@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     CONTENTS_INDEX contents_index;
+    private long backKeyPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,13 +117,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
-
+        priv_view = contents_index.GRAPHIC_VIEW.getValue();
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
     }
 
     public void onBackPressed(){
-        onlyOneVisible(priv_view);
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            showMsg("한번 더 누르면 종료됩니다.");
+            onlyOneVisible(priv_view);
+            return;
+        } if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            this.finish();
+        }
     }
 
     private void goURL(String url){
