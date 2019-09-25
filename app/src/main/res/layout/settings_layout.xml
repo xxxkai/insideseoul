@@ -40,7 +40,7 @@
             android:layout_height="100dp">
 
            <Button
-               android:id="@+id/BT_CONTRACT2"
+               android:id="@+id/BT_DEVELOPER"
                android:onClick="goWebView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#99d8de"
-                android:text=" 약관 동의"
+                android:text=" 개발 정보"
                 android:textColor="#515252"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
                 android:textColor="#515252"
-                android:text=" 약관에 동의한 서비스 사용 확인을 변경할 수 있습니다."
+                android:text=" 어플리케이션의 구성 정보와 개발자를 확인할 수 있습니다."
                 android:textSize="15dp" />
 
             </LinearLayout>

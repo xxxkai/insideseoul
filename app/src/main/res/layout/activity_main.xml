@@ -65,32 +65,16 @@
                     android:layout_height="match_parent">
 
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
-                    <!-- 그래픽 뷰 -->
+                    <!-- 맵 전체 뷰 -->
                     <include
                         android:id="@+id/graphic_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         layout="@layout/graphic_layout"
                         />
-                    <!-- 그래픽 뷰 하위 1 -->
+                    <!--  맵 구역별 뷰 -->
                     <include
-                        android:id="@+id/map_view1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/map1_layout"
-                        />
-
-                    <!-- 그래픽 뷰 하위 2 -->
-                    <include
-                        android:id="@+id/map_view2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/map2_layout"
-                        />
-
-                    <!-- 카테고리 뷰 -->
-                    <include
-                        android:id="@+id/category_view"
+                        android:id="@+id/map_all_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         layout="@layout/map_all_layout"
