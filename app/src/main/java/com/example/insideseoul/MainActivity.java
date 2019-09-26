@@ -21,6 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.insideseoul.OpenAPI.GuJSONParser;
+import com.example.insideseoul.OpenAPI.MetroJSONParser;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -150,7 +155,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
 */
-        onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+        //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+        GuJSONParser guJSONParser = new GuJSONParser();
+        MetroJSONParser metroJSONParser = new MetroJSONParser();
+
+        List guList = new ArrayList<Integer>();
+        List metroList = new ArrayList<Integer>();
+        try {
+            guList = guJSONParser.execute().get();
+            metroList = metroJSONParser.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /* // 실제 파싱된 데이터 불러오기 */
+
+
+        /* 값 확인용 // */
+        showMsg("paks >>>>>>>>>>> guList" + guList);
+        showMsg("paks >>>>>>>>>>> metroList" + metroList);
+
+
     }
 
     public void showMsg(String str){
