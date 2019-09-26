@@ -65,6 +65,13 @@
                     android:layout_height="match_parent">
 
                     <!-- 이 곳에 콘텐츠를 넣습니다.-->
+                    <!-- 로그인 뷰 -->
+                    <include
+                        android:id="@+id/login_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/login_layout"
+                        />
                     <!-- 맵 전체 뷰 -->
                     <include
                         android:id="@+id/graphic_view"

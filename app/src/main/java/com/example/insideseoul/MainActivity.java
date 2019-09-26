@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -24,6 +25,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     static boolean graphic_mode = false;
+    private boolean login_success = false;
+
     Button change_bt;
     Button home_bt;
     Button info_bt;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout contents_frame;
     LinearLayout contents[];
     int priv_view;
+    int next_view;
+
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
                             R.id.local_line_05, R.id.local_line_06, R.id.local_line_07, R.id.local_line_08,
@@ -75,14 +80,16 @@ public class MainActivity extends AppCompatActivity {
                             R.id.settings_view, R.id.mypage_view,
                             R.id.language_view, R.id.signup_view,
                             R.id.web_view, R.id.search_result_view,
-                            R.id.result_detail_view, R.id.question_view};
+                            R.id.result_detail_view, R.id.question_view,
+                            R.id.login_view};
 
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), MAP_ALL_VIEW(1),
         SETTINGS_VIEW(2), MYPAGE_VIEW(3),
         LANGUAGE_VIEW(4), SIGNUP_VIEW(5),
         WEB_VIEW(6), SEARCH_RESULT_VIEW(7),
-        RESULT_DETAIL_VIEW(8), QUESTION_VIEW(9);
+        RESULT_DETAIL_VIEW(8), QUESTION_VIEW(9),
+        LOGIN_VIEW(10);
 
         private int value;
         private CONTENTS_INDEX(int value) {
@@ -310,35 +317,34 @@ public class MainActivity extends AppCompatActivity {
                 goURL("https://www.naver.com");
         }
     }
-    public void showMypage(View v){
 
-        final EditText pw_input = new EditText(this);
+    public void tryLogin(View v){
+        // 이메일 및 아이디 체크
+        String email = ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).getText().toString();
+        String pass = ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).getText().toString();
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setView(pw_input);
-        alert.setTitle("비밀번호 입력");
-        alert.setMessage("비밀번호를 입력해주십시오");
+        showMsg("이메일 : " + email);
+        showMsg("패스워드 : " + pass);
 
-        alert.setPositiveButton("입력",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(getApplicationContext(),pw_input.getText().toString() ,Toast.LENGTH_LONG).show();
-                        // hash_pw = H(pw+slat)
-                        // Compare(hash_pw, stored_hash_pw)
-                        // Processing
-                        onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
-                    }
-                });
-        alert.setNegativeButton("뒤로가기",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //MainActivity.super.onBackPressed();
-                    }
-                });
+        if(true)
+            login_success = true;
+        else
+            login_success = false;
 
-        alert.show();
-
+        if(login_success)
+            onlyOneVisible(next_view);
     }
+
+    public void showMypage(View v) {
+        if (login_success) {
+            onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
+        }else{
+            next_view = contents_index.MYPAGE_VIEW.getValue();
+            onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
+        }
+    }
+
+
     public void showSettings(View v){
         showMsg("설정 화면으로 이동합니다.");
         onlyOneVisible(contents_index.SETTINGS_VIEW.getValue());
