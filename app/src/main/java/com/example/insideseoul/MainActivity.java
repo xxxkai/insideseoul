@@ -7,16 +7,31 @@ import androidx.core.content.ContextCompat;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+>>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+<<<<<<< HEAD
+=======
+import android.widget.CheckBox;
+import android.widget.EditText;
+>>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.insideseoul.DBResource.DBBoard;
+import com.example.insideseoul.DBResource.DBInit;
+import com.example.insideseoul.DBResource.DBMember;
 import com.example.insideseoul.OpenAPI.GuJSONParser;
 import com.example.insideseoul.OpenAPI.MetroJSONParser;
 
@@ -41,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
     int priv_view;
     int next_view;
 
+
+    /* 19.09.23, 회원가입 // */
+    private EditText username;
+    private EditText email;
+    private EditText passwd;
+    private EditText chkpasswd;
+    private CheckBox agree;
+    private Button btnjoin;
+    private Button chkemail;
+
+    private String agreeYN = "N";
+    private String passwdYN = "N";
+    private String chkemailYN =  "N";
+    DBInit dbInitMember, dbInitBoard;
+    DBBoard dbBoard;
+    DBMember dbMember;
+    /* // 19.09.23, 회원가입 */
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
                             R.id.local_line_05, R.id.local_line_06, R.id.local_line_07, R.id.local_line_08,
@@ -83,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
                             R.id.web_view, R.id.search_result_view,
                             R.id.result_detail_view, R.id.question_view,
                             R.id.login_view};
+
+    // 게시글 숫자
+    int[] board_cnt = new int[25];
 
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), MAP_ALL_VIEW(1),
@@ -131,6 +166,186 @@ public class MainActivity extends AppCompatActivity {
 
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
+        /* 19.09.23, 회원가입 // */
+        dbInitMember = new DBInit(this, "tbl_member", null, 1);
+        dbMember = new DBMember(this, "tbl_member", null, 1);
+
+        /* 19.09.25, DB 설정 */
+        dbInitBoard = new DBInit(this, "tbl_board", null, 1);
+        dbBoard = new DBBoard(this, "tbl_board", null, 1, 2);
+        /* 19.09.25, DB 설정 */
+
+        // editText 설정
+        username = (EditText) findViewById(R.id.INPUT_USERNAME);
+        email = (EditText) findViewById(R.id.INPUT_EMAIL);
+        passwd = (EditText) findViewById(R.id.INPUT_PASSWORD);
+        chkpasswd = (EditText) findViewById(R.id.INPUT_REPASSWORD);
+        agree = (CheckBox) findViewById(R.id.INPUT_AGREE);
+        btnjoin = (Button) findViewById(R.id.JOIN_DONE);
+        chkemail = (Button) findViewById(R.id.CHECK_EMAIL);
+
+        // 동의 여부 체크
+        agree.setOnClickListener(new CheckBox.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(agree.isChecked()) {
+                    agreeYN = "Y";
+                    showMsg("약관에 동의 하셨습니다.");
+                } else {
+                    agreeYN = "N";
+                    showMsg("약관에 동의하지 않으셨습니다.");
+                }
+            }
+        });
+
+        // 이메일 체크
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // 값 변경시 다시 이메일 중복 확인 필요
+                chkemailYN = "N";
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        // 비밀번호 확인 체크
+        chkpasswd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String password = passwd.getText().toString();
+                String chkpassword = chkpasswd.getText().toString();
+
+                if(password.equals(chkpassword)) {
+                    passwdYN = "Y";
+                } else {
+                    passwdYN = "N";
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        // 이메일 중복 체크
+        chkemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String emailTxt = email.getText().toString();
+                if(emailTxt.length() == 0) {
+                    chkemailYN = "N";
+                    showMsg("이메일을 먼저 입력해주세요.");
+                } else {
+                    System.out.println("paks >>>>>>>>>>>>>>>> member.validate(emailTxt): " + dbMember.validate(emailTxt));
+                    if(!dbMember.validate(emailTxt)) {
+                        chkemailYN = "N";
+                        showMsg("이메일을 형식을 확인해주세요.");
+                        email.requestFocus();
+                        return;
+                    } else {
+                        // 이메일 중복 체크
+                        if(dbMember.hasEmail(emailTxt).equals("200")) {
+                            chkemailYN = "Y";
+                            showMsg("사용할 수 있는 이메일 입니다.");
+                        } else {
+                            chkemailYN = "N";
+                            showMsg("중복되는 이메일 입니다.");
+                        }
+                    }
+                }
+            }
+        });
+        // 회원가입 버튼 클릭시
+        btnjoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 이름 입력 확인
+                if(username.getText().toString().length() == 0) {
+                    showMsg("이름을 입력해주세요.");
+                    username.requestFocus();
+                    return;
+                }
+                // 이메일 입력 확인
+                if(email.getText().toString().length() == 0) {
+                    showMsg("이메일을 입력해주세요.");
+                    email.requestFocus();
+                    return;
+                }
+                // 비밀번호 입력 확인
+                if(passwd.getText().toString().length() == 0) {
+                    showMsg("비밀번호를 입력해주세요.");
+                    passwd.requestFocus();
+                    return;
+                }
+                // 비밀번호 확인 입력 확인
+                if(chkpasswd.getText().toString().length() == 0) {
+                    showMsg("비밀번호 확인을 입력해주세요.");
+                    chkpasswd.requestFocus();
+                    return;
+                }
+                // 약관동의 확인
+                if(agreeYN.equals("N")) {
+                    showMsg("약관에 동의해주세요.");
+                    return;
+                }
+                // 이메일 중복 확인
+                if(chkemailYN.equals("N")) {
+                    showMsg("이메일 중복 확인을 해주세요.");
+                    return;
+                }
+                // 비밀번호 확인
+                if(passwdYN.equals("N")) {
+                    showMsg("비밀번호가 일치하지 않습니다.");
+                    return;
+                }
+
+                String emailTxt = email.getText().toString();
+                String passwordTxt = passwd.getText().toString();
+                String nameTxt = username.getText().toString();
+
+                // 이메일 중복 체크
+                if(dbMember.hasEmail(emailTxt).equals("500")) {
+                    chkemailYN = "N";
+                    showMsg("이미 등록된 이메일 입니다.");
+                    return;
+                }
+
+                dbMember.insert(emailTxt, passwordTxt, "Y", nameTxt, "USR");
+
+                System.out.println();
+
+                showMsg("회원가입이 완료되었습니다.");
+            }
+        });
+        /* // 19.09.23, 회원가입 */
+
+        // 구 마다 리스트 불러오기
+        for(int i = 0; i < 25; i ++) {
+            String tmp = "";
+
+            if(i < 10) {
+                tmp = "GU0" + i;
+            }
+            else {
+                tmp = "GU" + i;
+            }
+            board_cnt[i] = dbBoard.getDataCnt(tmp);
+        }
     }
 
     public void onBackPressed(){
@@ -172,6 +387,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 */
         //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+        GuJSONParser guJSONParser = new GuJSONParser();
+        MetroJSONParser metroJSONParser = new MetroJSONParser();
+
+        List guList = new ArrayList<Integer>();
+        List metroList = new ArrayList<Integer>();
+        try {
+            guList = guJSONParser.execute().get();
+            metroList = metroJSONParser.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /* // 실제 파싱된 데이터 불러오기 */
+
+
+        /* 값 확인용 // */
+        showMsg("paks >>>>>>>>>>> guList" + guList);
+        showMsg("paks >>>>>>>>>>> metroList" + metroList);
     }
 
     public void showMsg(String str){
@@ -311,7 +543,8 @@ public class MainActivity extends AppCompatActivity {
         int offset = GraphicLayout.getNameStartIndex(local);
         for(int i = 0; i < visible_icon_count; i++){
             // 더미데이터 생성
-            alert_num = rand.nextInt()%5;
+            alert_num = board_cnt[i];
+            congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
 
 

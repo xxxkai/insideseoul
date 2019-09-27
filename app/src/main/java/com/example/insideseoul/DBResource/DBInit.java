@@ -70,15 +70,15 @@ public class DBInit extends SQLiteOpenHelper {
                 sb.append("file_path3 VARCHAR(256) DEFAULT NULL, ");
                 sb.append("create_datetime DATETIME NOT NULL DEFAULT (DATETIME('now','localtime')), ");
                 sb.append("update_datetime DATETIME NULL DEFAULT NULL, ");
-                sb.append("board_type VARCHAR(4) DEFAULT NULL");
+                sb.append("board_type VARCHAR(4) DEFAULT NULL, ");
                 sb.append("gu_type VARCHAR(4) DEFAULT NULL");
                 sb.append(") ");
             }
 
             if(name.equals("tbl_member") || name.equals("tbl_like") || name.equals("tbl_board")) {
                 db.execSQL(sb.toString());
-                if(name.equals("tbl_member")) dbMember = new DBMember(context, "tbl_member", null, 1);
-                if(name.equals("tbl_board")) dbBoard = new DBBoard(context, "tbl_board", null, 1);
+                // if(name.equals("tbl_member")) dbMember = new DBMember(context, "tbl_member", null, 1);
+                if(name.equals("tbl_board")) dbBoard = new DBBoard(context, "tbl_board", null, 1, 1);
             }
         } else {
             Log.i("paks >>>>>>>>>>>>>>> doesDatabaseExist: ","DB Exist");
