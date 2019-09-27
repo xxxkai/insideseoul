@@ -721,6 +721,12 @@ public class MainActivity extends AppCompatActivity {
         // 이메일 및 아이디 체크
         String email = ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).getText().toString();
         String pass = ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).getText().toString();
+        Boolean auto_login = ((CheckBox)findViewById(R.id.AUTO_LOGIN)).isChecked();
+
+        showMsg("이메일 : " + email);
+        showMsg("패스워드 : " + pass);
+        showMsg(auto_login?"자동 로그인 활성화":"자동 로그인 비활성화");
+
         String encryptPass = Cipher.getBase64(Cipher.doCipher(pass.getBytes()));
 
         if(email.equals("") || email == null) {
