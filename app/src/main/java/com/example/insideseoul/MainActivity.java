@@ -177,6 +177,23 @@ public class MainActivity extends AppCompatActivity {
         webview.setWebViewClient(new WebViewClient());
         webview.loadUrl(url);
     }
+
+    private int[] rankData(int[] data){
+        int[] ret = new int[data.length];
+        int cnt;
+
+        for (int i = 0; i < data.length; i++) {
+            cnt = 0;
+            for (int j = 0; j < data.length; j++) {
+                if (data[i] < data[j]) {
+                    cnt++;
+                }
+            }
+            ret[i] = cnt + 1;
+        }
+        return ret;
+    }
+
     public void goTest(View v){
 /*
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
@@ -246,6 +263,45 @@ public class MainActivity extends AppCompatActivity {
         graphic_mode = !graphic_mode;
     }
 
+    private int[] getCongestion(){
+        GuJSONParser guJSONParser = new GuJSONParser();
+        MetroJSONParser metroJSONParser = new MetroJSONParser();
+
+        List guList = new ArrayList<Integer>();
+        List metroList = new ArrayList<Integer>();
+        try {
+            guList = guJSONParser.execute().get();
+            metroList = metroJSONParser.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        int[] con = new int[GraphicLayout.getLocalCount('s')+GraphicLayout.getLocalCount('n')];
+        int[] rank;
+
+        /* // 실제 파싱된 데이터 불러오기 */
+        for(int i = 0; i < con.length; i++){
+            con[i] = (Integer.parseInt(guList.get(i).toString())) + (Integer.parseInt(metroList.get(i).toString())*10); // 거주인구 1배수, 유동인구 10배수
+        }
+
+        rank = rankData(con); // 순위 계산
+
+        // 3단계 혼잡도로 변경
+        for(int i = 0; i < rank.length; i++) {
+            if(rank[i] < 9) rank[i] = 2;
+            else if(rank[i] < 17) rank[i] = 1;
+            else rank[i] = 0;
+        }
+
+        // 출력
+        for(int i = 0; i < rank.length; i++) {
+            System.out.println("con["+i+"] = "+con[i] + " rank : " + rank[i]);
+        }
+
+        return rank;
+    }
+
     private void initMap(char local){
         final LinearLayout[] icons = new LinearLayout[icon_ids.length];
         Button[] alerts = new Button[alert_ids.length];
@@ -301,11 +357,14 @@ public class MainActivity extends AppCompatActivity {
             alert_num = board_cnt[i];
             congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
-            congestion = (congestion<0)?((congestion*-1)):(congestion);
+
 
             alerts[i].setText(""+alert_num);
             names[i].setText(GraphicLayout.getName(i+offset));
             map_imgs[i].setImageDrawable(getResources().getDrawable(img_drawables[i+offset], getApplicationContext().getTheme()));
+
+            // 혼잡도 출력
+            congestion = getCongestion()[GraphicLayout.getIndex(names[i].getText().toString())];
             map_imgs[i].setColorFilter(Color.parseColor(GraphicLayout.Colors[congestion]));
         }
 
