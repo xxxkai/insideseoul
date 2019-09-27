@@ -14,12 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -492,6 +496,45 @@ public class MainActivity extends AppCompatActivity {
         return rank;
     }
 
+    private boolean setListItem(String[] titles){
+        if(titles == null)
+            return false;
+
+        // 목록 출력
+        ListView lv = findViewById(R.id.OUTPUT_SEARCH_RESULT);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles) ;
+        lv.setAdapter(adapter) ;
+
+        // 처리 이벤트 등록
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // 상세 화면으로 이동
+                onlyOneVisible(contents_index.RESULT_DETAIL_VIEW.getValue());
+                String strText = (String) parent.getItemAtPosition(position) ;
+                showMsg(strText);
+
+                // 상세 화면의 요소들 설정
+                ImageView img_right = findViewById(R.id.POSTER_RIGHT);
+                ImageView img_left = findViewById(R.id.POSTER_LEFT);
+                TextView detail = findViewById(R.id.OUTPUT_DETAIL);
+                detail.setText(strText +"가 눌림");
+
+            }
+        }) ;
+
+        return true;
+    }
+
+    private boolean clearList(){
+        // 빈 리스트로 초기화한다.
+        String[] emtpy = {};
+        ListView lv = findViewById(R.id.OUTPUT_SEARCH_RESULT);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, emtpy) ;
+        lv.setAdapter(adapter) ;
+        return true;
+    }
+
     private void initMap(char local){
         final LinearLayout[] icons = new LinearLayout[icon_ids.length];
         Button[] alerts = new Button[alert_ids.length];
@@ -565,6 +608,11 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i < icon_ids.length; i++){
                     if(icon_ids[i] == id) {
                         showMsg(names[i].getText() + "검색 결과");
+                        ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText(names[i].getText() + " 검색 결과");
+                        /* 리스트 뷰 추가 */
+                        String title[] = {"AAA", "BBB", "CCC"};
+                        setListItem(title);
+                        //clearList();
                     }
                 }
                 onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
