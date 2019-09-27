@@ -245,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 3단계 혼잡도로 변경
         for(int i = 0; i < rank.length; i++) {
-            if(rank[i] < 9) rank[i] = 0;
+            if(rank[i] < 9) rank[i] = 2;
             else if(rank[i] < 17) rank[i] = 1;
-            else rank[i] = 2;
+            else rank[i] = 0;
         }
 
         // 출력
@@ -311,13 +311,15 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < visible_icon_count; i++){
             // 더미데이터 생성
             alert_num = rand.nextInt()%5;
-            congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
-            congestion = (congestion<0)?((congestion*-1)):(congestion);
+
 
             alerts[i].setText(""+alert_num);
             names[i].setText(GraphicLayout.getName(i+offset));
             map_imgs[i].setImageDrawable(getResources().getDrawable(img_drawables[i+offset], getApplicationContext().getTheme()));
+
+            // 혼잡도 출력
+            congestion = getCongestion()[GraphicLayout.getIndex(names[i].getText().toString())];
             map_imgs[i].setColorFilter(Color.parseColor(GraphicLayout.Colors[congestion]));
         }
 
