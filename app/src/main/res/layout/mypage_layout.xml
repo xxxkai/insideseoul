@@ -22,6 +22,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="logout"
                 android:id="@+id/BT_LOGOUT"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
@@ -60,14 +61,16 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="15dp"/>
+
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="김서울"
                     android:textColor="#000"
-                    android:textStyle="bold"
                     android:textSize="20dp"
-                    android:text="김서울" />
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/user_email"
                     android:layout_width="match_parent"
