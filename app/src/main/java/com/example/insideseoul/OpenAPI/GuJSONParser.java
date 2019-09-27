@@ -36,7 +36,7 @@ public class GuJSONParser extends AsyncTask<Void, Integer, List> {
         txt = getAPI(path, totalPage, totalPage);
 
         if(txt.length() == 0) {
-            Log.i("데이터가 존재하지 않습니다.", txt);
+            Log.i("데이터가 존재하지 않습니다.", "");
         } else {
             initEntity(txt, serviceKey, "list_total_count");
 
