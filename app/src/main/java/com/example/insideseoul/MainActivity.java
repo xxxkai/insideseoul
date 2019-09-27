@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     DBInit dbInitMember, dbInitBoard;
     DBBoard dbBoard;
     DBMember dbMember;
+    Cipher cipher;
     /* // 19.09.23, 회원가입 */
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
         /* 19.09.23, 회원가입 // */
+        cipher = new Cipher();
         dbInitMember = new DBInit(this, "tbl_member", null, 1);
         dbMember = new DBMember(this, "tbl_member", null, 1);
 
@@ -314,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String emailTxt = email.getText().toString();
-                String passwordTxt = passwd.getText().toString();
+                String passwordTxt = Cipher.getBase64(Cipher.doCipher(passwd.getText().toString().getBytes()));
                 String nameTxt = username.getText().toString();
 
                 // 이메일 중복 체크
@@ -666,19 +668,52 @@ public class MainActivity extends AppCompatActivity {
         // 이메일 및 아이디 체크
         String email = ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).getText().toString();
         String pass = ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).getText().toString();
+<<<<<<< HEAD
         Boolean auto_login = ((CheckBox)findViewById(R.id.AUTO_LOGIN)).isChecked();
 
         showMsg("이메일 : " + email);
         showMsg("패스워드 : " + pass);
         showMsg(auto_login?"자동 로그인 활성화":"자동 로그인 비활성화");
+=======
+        String encryptPass = Cipher.getBase64(Cipher.doCipher(pass.getBytes()));
 
-        if(true)
-            login_success = true;
-        else
-            login_success = false;
+        if(email.equals("") || email == null) {
+            showMsg("이메일을 입력해주세요");
+            return ;
+        }
+        if(pass.equals("") || pass == null) {
+            showMsg("패스워드를 입력해주세요");
+            return ;
+        }
 
-        if(login_success)
-            onlyOneVisible(next_view);
+        // 로그인 확인 됬을 때 처리. (redoma)
+        boolean isCorrect = false;
+        if(dbMember.isMember(email, encryptPass)) isCorrect = true;
+>>>>>>> 4a25ae42df1c9cb0d06562bc289982e8cbd0bedc
+
+        if(isCorrect) {
+            onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
+            // mypage 보일 값 설정
+            ((TextView)findViewById(R.id.user_name)).setText("");
+
+        }
+        else {
+            showMsg("이메일과 비밀번호를 확인해주세요.");
+            return ;
+        }
+
+        if(isCorrect) login_success = true;
+        else login_success = false;
+
+        if(login_success) onlyOneVisible(next_view);
+    }
+
+    public void logout(View v) {
+        // 회원가입 폼 초기화
+        ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).setText("");
+        ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).setText("");
+        onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
+        login_success = false;
     }
 
     public void showMypage(View v) {

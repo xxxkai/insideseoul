@@ -62,8 +62,7 @@ public class DBMember extends SQLiteOpenHelper {
         return matcher.find();
     }
 
-
-    //특정 id를 갖는 데이터를 json으로 출력
+    // 19.09.23, 특정 id를 갖는 데이터를 json으로 출력
     public String hasEmail(String email) {
         String result = "200";
         Log.i("email", String.valueOf(email));
@@ -101,5 +100,78 @@ public class DBMember extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return result;
+    }
+
+    // 회원가입 확인
+    public boolean isMember(String email, String password) {
+        boolean result = false;
+        Log.i("email", String.valueOf(email));
+        Log.i("password", String.valueOf(password));
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT COUNT(*) AS sum FROM " + tb_name + " WHERE email = ? AND password = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(email), String.valueOf(password)});
+        cursor.moveToPosition(0);
+
+        int totalColumn = cursor.getColumnCount();
+        JSONObject rowObject = new JSONObject();
+
+        for (int i = 0; i < totalColumn; i++) {
+            if (cursor.getColumnName(i) != null) {
+                try {
+                    if (cursor.getString(i) != null) {
+                        rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                    } else {
+                        rowObject.put(cursor.getColumnName(i), "");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        cursor.close();
+        db.close();
+        System.out.println("paks >>>>>>>>>>>>>>>>>>>rowObject: " + rowObject);
+        try {
+            String tmp = (String)rowObject.get("sum");
+
+            if(tmp.equals("0")) result = false;
+            else result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    // 회원가입 정보 호출
+    public JSONObject getData(String email, String password) {
+        boolean result = false;
+        Log.i("email", String.valueOf(email));
+        Log.i("password", String.valueOf(password));
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + tb_name + " WHERE email = ? AND password = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(email), String.valueOf(password)});
+        cursor.moveToPosition(0);
+
+        int totalColumn = cursor.getColumnCount();
+        JSONObject rowObject = new JSONObject();
+
+        for (int i = 0; i < totalColumn; i++) {
+            if (cursor.getColumnName(i) != null) {
+                try {
+                    if (cursor.getString(i) != null) {
+                        rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                    } else {
+                        rowObject.put(cursor.getColumnName(i), "");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        cursor.close();
+        db.close();
+
+        System.out.println("paks >>>>>>>>>>>>>>>>>>>rowObject: " + rowObject);
+        return rowObject;
     }
 }
