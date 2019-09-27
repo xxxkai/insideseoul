@@ -41,15 +41,54 @@ public class DBBoard extends SQLiteOpenHelper {
         }
     }
 
-    // '구'의 값으로 불러오기
-    public JSONObject getData(String guType) {
-        Log.i("guType", String.valueOf(guType));
+    //시작 id부터 일정 갯수의 데이터를 json array로 얻어온다
+    public JSONArray getData(int cnt, String guType) {
         SQLiteDatabase db = getReadableDatabase();
+
         String query = "SELECT * FROM " + tb_name + " WHERE gu_type = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(guType)});
+        JSONArray resultSet = new JSONArray();
+        cursor.moveToPosition(0);
+        int index = 0;
+        while (index < cnt) {
+
+            int totalColumn = cursor.getColumnCount();
+            JSONObject rowObject = new JSONObject();
+
+            for (int i = 0; i < totalColumn; i++) {
+                if (cursor.getColumnName(i) != null) {
+                    try {
+                        if (cursor.getString(i) != null) {
+                            rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                        } else {
+                            rowObject.put(cursor.getColumnName(i), "");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            resultSet.put(rowObject);
+            cursor.moveToNext();
+            index = index + 1;
+        }
+
+        cursor.close();
+        return resultSet;
+    }
+
+    // 해당구의 한 데이터 호출
+    public JSONObject getOneData(int idx) {
+        Log.i("guType", String.valueOf(idx));
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + tb_name + " WHERE idx = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idx)});
         cursor.moveToPosition(0);
 
         int totalColumn = cursor.getColumnCount();
+
+        System.out.println("getData from Board: " + totalColumn);
         JSONObject rowObject = new JSONObject();
 
         for (int i = 0; i < totalColumn; i++) {
@@ -70,7 +109,7 @@ public class DBBoard extends SQLiteOpenHelper {
         return rowObject;
     }
 
-    // '구'의 값으로 불러오기
+    // 해당구의 데이터 총량 불러오기
     public int getDataCnt(String guType) {
         Log.i("guType", String.valueOf(guType));
         SQLiteDatabase db = getReadableDatabase();
@@ -108,28 +147,12 @@ public class DBBoard extends SQLiteOpenHelper {
         return result;
     }
 
-    //새로운 데이터 입력
-    public void insert(String email, String password, String approval_yn, String name, String member_class) {
-        // 읽고 쓰기가 가능하게 DB 열기
-        SQLiteDatabase db = getWritableDatabase();
-        // DB에 입력한 값으로 행 추가
-        ContentValues values = new ContentValues();
-        values.put("email", email);
-        values.put("password", password);
-        values.put("approval_yn", approval_yn);
-        values.put("name", name);
-        values.put("member_class", member_class);
-        db.insert(tb_name, null, values);
-
-        db.close();
-    }
-
     // 샘플 데이터
     public void initInsert(SQLiteDatabase db) {
         StringBuffer sb = new StringBuffer();
         sb.append("[");
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU00 샘플 데이터1\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터1111111111111\",");
@@ -137,7 +160,7 @@ public class DBBoard extends SQLiteOpenHelper {
         sb.append("\"board_type\":\"B001\",");
         sb.append("\"gu_type\":\"GU00\"}, ");
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU00 샘플 데이터2\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터22222222222222\",");
@@ -146,7 +169,7 @@ public class DBBoard extends SQLiteOpenHelper {
         sb.append("\"gu_type\":\"GU00\"}, ");
 
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU01 샘플 데이터1\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터1111111111111\",");
@@ -154,7 +177,7 @@ public class DBBoard extends SQLiteOpenHelper {
         sb.append("\"board_type\":\"B001\",");
         sb.append("\"gu_type\":\"GU01\"}, ");
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU01 샘플 데이터1\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터22222222222222\",");
@@ -163,7 +186,7 @@ public class DBBoard extends SQLiteOpenHelper {
         sb.append("\"gu_type\":\"GU01\"}, ");
 
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU02 샘플 데이터1\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터1111111111111\",");
@@ -171,7 +194,7 @@ public class DBBoard extends SQLiteOpenHelper {
         sb.append("\"board_type\":\"B001\",");
         sb.append("\"gu_type\":\"GU02\"}, ");
         sb.append("{\"create_id\":\"admin1\",");
-        sb.append("\"subject\":\"샘플 데이터1\",");
+        sb.append("\"subject\":\"GU02 샘플 데이터1\",");
         sb.append("\"startdate\":\"2019.09.01\",");
         sb.append("\"enddate\":\"2019.09.30\",");
         sb.append("\"intro_content\":\"샘플 메인 데이터22222222222222\",");

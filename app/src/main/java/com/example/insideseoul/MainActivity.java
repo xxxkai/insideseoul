@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -34,7 +38,13 @@ import com.example.insideseoul.DBResource.DBMember;
 import com.example.insideseoul.OpenAPI.GuJSONParser;
 import com.example.insideseoul.OpenAPI.MetroJSONParser;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -288,8 +298,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 // 비밀번호 입력 확인
-                if(passwd.getText().toString().length() == 0) {
-                    showMsg("비밀번호를 입력해주세요.");
+                int passLength = passwd.getText().toString().length();
+                if(passLength == 0 || passLength < 8) {
+                    if(passLength == 0) showMsg("비밀번호를 입력해주세요.");
+                    if(passLength < 8) showMsg("비밀번호는 최소 8자리 이상 입력해주세요.");
                     passwd.requestFocus();
                     return;
                 }
@@ -337,14 +349,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 구 마다 리스트 불러오기
         for(int i = 0; i < 25; i ++) {
-            String tmp = "";
-
-            if(i < 10) {
-                tmp = "GU0" + i;
-            }
-            else {
-                tmp = "GU" + i;
-            }
+            String tmp = intToStringWhenUnderTen("GU", i);
             board_cnt[i] = dbBoard.getDataCnt(tmp);
         }
     }
@@ -496,13 +501,14 @@ public class MainActivity extends AppCompatActivity {
         return rank;
     }
 
-    private boolean setListItem(String[] titles){
-        if(titles == null)
+    private boolean setListItem(String[] boardTitles, int[] boardIdx){
+        if(boardTitles == null)
             return false;
 
+        final int[] tmpIdx = boardIdx;
         // 목록 출력
         ListView lv = findViewById(R.id.OUTPUT_SEARCH_RESULT);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles) ;
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, boardTitles);
         lv.setAdapter(adapter) ;
 
         // 처리 이벤트 등록
@@ -512,18 +518,49 @@ public class MainActivity extends AppCompatActivity {
                 // 상세 화면으로 이동
                 onlyOneVisible(contents_index.RESULT_DETAIL_VIEW.getValue());
                 String strText = (String) parent.getItemAtPosition(position) ;
+                int strIdx = tmpIdx[position];
                 showMsg(strText);
+
+                JSONObject jobj = dbBoard.getOneData(strIdx);
+                String imagePath1 = "sample.jpg";
+                String imagePath2 = "sample.jpg";
+                String intro_content = "sample";
+                try {
+                    //if(((String)jobj.get("file_path1")).equals("") || (String)jobj.get("file_path1") == null) imagePath1 = (String)jobj.get("file_path1");
+                    //if(((String)jobj.get("file_path2")).equals("") || (String)jobj.get("file_path2") == null) imagePath2 = (String)jobj.get("file_path2");
+                    if(((String)jobj.get("intro_content")).equals("") || (String)jobj.get("intro_content") == null) intro_content = (String)jobj.get("intro_content");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 // 상세 화면의 요소들 설정
                 ImageView img_right = findViewById(R.id.POSTER_RIGHT);
                 ImageView img_left = findViewById(R.id.POSTER_LEFT);
+                // getFromImgAssets(imagePath1 ,img_right);
+                // getFromImgAssets(imagePath2 ,img_left);
                 TextView detail = findViewById(R.id.OUTPUT_DETAIL);
-                detail.setText(strText +"가 눌림");
-
+                detail.setText(intro_content);
             }
         }) ;
 
         return true;
+    }
+
+    // 추후에 이미지 추가 요망 (redoma)
+    /*public void getFromImgAssets(String fileName, ImageView imageView){
+        try {
+            imageView.setImageResource(R.drawable.sample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    // int 값이 0 이하인 경우 '0' 추가
+    public String intToStringWhenUnderTen(String prefix, int num) {
+        String result = "";
+        if(num < 10) result = prefix + "0" + num;
+        else result = prefix + "" +  num;
+        return result;
     }
 
     private boolean clearList(){
@@ -610,8 +647,24 @@ public class MainActivity extends AppCompatActivity {
                         showMsg(names[i].getText() + "검색 결과");
                         ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText(names[i].getText() + " 검색 결과");
                         /* 리스트 뷰 추가 */
-                        String title[] = {"AAA", "BBB", "CCC"};
-                        setListItem(title);
+                        String boardTitle[] = new String[board_cnt[i]];
+                        int boardIdx[] = new int[board_cnt[i]];
+                        for(int j = 0; j < board_cnt[i]; j ++) {
+                            JSONArray jsonBoard;
+                            try {
+                                jsonBoard = dbBoard.getData(board_cnt[i], intToStringWhenUnderTen("GU", i));
+                                //String title = (String)((JSONObject)jsonBoard.get(j)).get("subject");
+                                //int idx = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
+                                boardTitle[j] = (String)((JSONObject)jsonBoard.get(j)).get("subject");
+                                boardIdx[j] = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+
+                        System.out.println("pask >>>>>>> title: " + boardTitle);
+                        System.out.println("pask >>>>>>> idx: " + boardIdx);
+                        setListItem(boardTitle, boardIdx);
                         //clearList();
                     }
                 }
@@ -686,7 +739,17 @@ public class MainActivity extends AppCompatActivity {
         if(isCorrect) {
             onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
             // mypage 보일 값 설정
-            ((TextView)findViewById(R.id.user_name)).setText("");
+            JSONObject member = dbMember.getData(email, encryptPass);
+            String getName = "";
+            String getEmail = "";
+            try {
+                getName = (String)member.get("name");
+                getEmail = (String)member.get("email");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ((TextView)findViewById(R.id.user_name)).setText(getName);
+            ((TextView)findViewById(R.id.user_email)).setText(getEmail);
 
         }
         else {
@@ -704,8 +767,8 @@ public class MainActivity extends AppCompatActivity {
         // 회원가입 폼 초기화
         ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).setText("");
         ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).setText("");
-        onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
         login_success = false;
+        onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
     }
 
     public void showMypage(View v) {
