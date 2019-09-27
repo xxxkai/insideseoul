@@ -7,33 +7,22 @@ import androidx.core.content.ContextCompat;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
->>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.widget.CheckBox;
 import android.widget.EditText;
->>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.insideseoul.DBResource.DBBoard;
 import com.example.insideseoul.DBResource.DBInit;
@@ -369,6 +358,10 @@ public class MainActivity extends AppCompatActivity {
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());
         webview.loadUrl(url);
+    }
+
+    public void goSignup(View v){
+        onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
     }
 
     private int[] rankData(int[] data){
