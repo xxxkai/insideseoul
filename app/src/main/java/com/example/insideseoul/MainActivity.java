@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -19,7 +22,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
 import android.widget.CheckBox;
 import android.widget.EditText;
 >>>>>>> 09bdade5407d06e2c1b3ab91824d0f5ebb96178a
