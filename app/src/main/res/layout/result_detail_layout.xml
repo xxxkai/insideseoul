@@ -104,6 +104,7 @@
         </LinearLayout>
 
         <WebView
+            android:id="@+id/WEB_VIEW_DETAIL"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

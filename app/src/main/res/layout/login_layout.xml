@@ -83,6 +83,26 @@
                 android:inputType="textPassword" />
         </LinearLayout>
         <!-- 항목 3  끝 -->
+        <!-- 항목 2 시작 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+            <CheckBox
+                android:id="@+id/AUTO_LOGIN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="자동 로그인"
+                />
+
+        </LinearLayout>
+        <!-- 항목 3  끝 -->
+
+
              <!-- 항목 5 시작 -->
         <LinearLayout
             android:layout_width="match_parent"
