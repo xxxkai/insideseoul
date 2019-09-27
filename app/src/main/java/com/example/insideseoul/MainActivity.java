@@ -21,6 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.insideseoul.DBResource.DBBoard;
+import com.example.insideseoul.DBResource.DBInit;
+import com.example.insideseoul.DBResource.DBMember;
 import com.example.insideseoul.OpenAPI.GuJSONParser;
 import com.example.insideseoul.OpenAPI.MetroJSONParser;
 
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     int priv_view;
     int next_view;
 
+    DBInit dbInitMember, dbInitBoard;
+    DBBoard dbBoard;
+    DBMember dbMember;
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
                             R.id.local_line_05, R.id.local_line_06, R.id.local_line_07, R.id.local_line_08,
@@ -87,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
                             R.id.web_view, R.id.search_result_view,
                             R.id.result_detail_view, R.id.question_view,
                             R.id.login_view};
+
+    // 게시글 숫자
+    int[] board_cnt = new int[25];
 
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), MAP_ALL_VIEW(1),
@@ -132,6 +141,24 @@ public class MainActivity extends AppCompatActivity {
         priv_view = contents_index.GRAPHIC_VIEW.getValue();
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
 
+        /* 19.09.25, DB 설정 */
+        dbInitMember = new DBInit(this, "tbl_member", null, 1);
+        dbInitBoard = new DBInit(this, "tbl_board", null, 1);
+        // dbMember = new DBMember(this, "tbl_member", null, 1);
+        dbBoard = new DBBoard(this, "tbl_board", null, 1);
+        /* 19.09.25, DB 설정 */
+
+        for(int i = 0; i < 25; i ++) {
+            String tmp = "";
+
+            if(i < 10) {
+                tmp = "GU0" + i;
+            }
+            else {
+                tmp = "GU" + i;
+            }
+            board_cnt[i] = dbBoard.getDataCnt(tmp);
+        }
     }
 
     public void onBackPressed(){
@@ -173,8 +200,6 @@ public class MainActivity extends AppCompatActivity {
         /* 값 확인용 // */
         showMsg("paks >>>>>>>>>>> guList" + guList);
         showMsg("paks >>>>>>>>>>> metroList" + metroList);
-
-
     }
 
     public void showMsg(String str){
@@ -273,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         int offset = GraphicLayout.getNameStartIndex(local);
         for(int i = 0; i < visible_icon_count; i++){
             // 더미데이터 생성
-            alert_num = rand.nextInt()%5;
+            alert_num = board_cnt[i];
             congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
             congestion = (congestion<0)?((congestion*-1)):(congestion);
