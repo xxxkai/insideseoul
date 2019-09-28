@@ -9,8 +9,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -24,7 +22,6 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.example.insideseoul.DBResource.DBBoard;
 import com.example.insideseoul.DBResource.DBInit;
@@ -47,10 +43,8 @@ import com.example.insideseoul.OpenAPI.MetroJSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -181,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
 
         onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
         priv_view = contents_index.GRAPHIC_VIEW.getValue();
+
+        // 혼잡도 선행 계산
         congestionLevel = getCongestionLevel();
 
         showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
@@ -910,7 +906,12 @@ public class MainActivity extends AppCompatActivity {
     public void notSupported(View v){
         showMsg("해당 기능은 현재 버전에서 지원하지 않습니다.");
     }
-    public void goQustion(View v){
+    public void goQuestions(View v){
         onlyOneVisible(contents_index.QUESTION_VIEW.getValue());
+    }
+    public void likeit(View v){
+        View like = findViewById(R.id.LIKEIT);
+        like.setBackgroundResource(R.drawable.likeit);
+        showMsg("좋아요를 누르셨습니다.");
     }
 }
