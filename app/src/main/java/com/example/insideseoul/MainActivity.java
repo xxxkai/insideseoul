@@ -568,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
                     if(!(filePath1.equals("") || filePath1== null)) imagePath1 = filePath1;
                     if(!(filePath2.equals("") || filePath2 == null)) imagePath2 = filePath2;
                     if(!(content.equals("") || content == null)) intro_content = content;
-                    if(subject1.length() != 0) subject = "subject";
+                    if(subject1.length() != 0) subject = subject1;
                     subject += "\n" + startdate + " ~ ";
                     if(enddate.length() != 0) subject += enddate;
                     else subject += "진행중";
@@ -748,8 +748,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        System.out.println("pask >>>>>>> title: " + boardTitle);
-                        System.out.println("pask >>>>>>> idx: " + boardIdx);
                         setListItem(boardTitle, boardIdx);
                         //clearList();
                     }

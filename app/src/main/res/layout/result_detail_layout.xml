@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="800dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <Space
             android:layout_width="match_parent"
@@ -118,7 +118,7 @@
         <WebView
             android:id="@+id/WEB_VIEW_DETAIL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
