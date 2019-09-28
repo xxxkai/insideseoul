@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:text="검색결과"
             android:textStyle="bold"
+            android:textColor="#515252"
             android:textSize="20dp"
             android:gravity="center"/>
         <Space
@@ -30,6 +31,7 @@
         <ListView
             android:id="@+id/OUTPUT_SEARCH_RESULT"
             android:layout_width="match_parent"
-            android:layout_height="800dp" />
+            android:layout_height="800dp"
+            />
     </LinearLayout>
 </LinearLayout>

@@ -204,7 +204,7 @@
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
                 <Button
-                    android:onClick="goQustion"
+                    android:onClick="goQuestions"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:background="#00ff0000"
