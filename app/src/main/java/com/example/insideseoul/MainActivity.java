@@ -179,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
         // 혼잡도 선행 계산
         congestionLevel = getCongestionLevel();
 
-        showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
-
         /* 19.09.23, 회원가입 // */
         cipher = new Cipher();
         dbInitMember = new DBInit(this, "tbl_member", null, 1);
@@ -290,22 +288,22 @@ public class MainActivity extends AppCompatActivity {
                 String emailTxt = email.getText().toString();
                 if(emailTxt.length() == 0) {
                     chkemailYN = "N";
-                    showMsg("이메일을 먼저 입력해주세요.");
+                    showAlert("회원가입", "이메일을 먼저 입력해주세요.", "확인");
                 } else {
                     System.out.println("paks >>>>>>>>>>>>>>>> member.validate(emailTxt): " + dbMember.validate(emailTxt));
                     if(!dbMember.validate(emailTxt)) {
                         chkemailYN = "N";
-                        showMsg("이메일을 형식을 확인해주세요.");
+                        showAlert("회원가입", "이메일을 형식을 확인해주세요.", "확인");
                         email.requestFocus();
                         return;
                     } else {
                         // 이메일 중복 체크
                         if(dbMember.hasEmail(emailTxt).equals("200")) {
                             chkemailYN = "Y";
-                            showMsg("사용할 수 있는 이메일 입니다.");
+                            showAlert("회원가입", "사용할 수 있는 이메일 입니다.", "확인");
                         } else {
                             chkemailYN = "N";
-                            showMsg("중복되는 이메일 입니다.");
+                            showAlert("회원가입", "중복되는 이메일 입니다.", "확인");
                         }
                     }
                 }
@@ -317,43 +315,43 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 이름 입력 확인
                 if(username.getText().toString().length() == 0) {
-                    showMsg("이름을 입력해주세요.");
+                    showAlert("회원가입", "이름을 입력해주세요.", "확인");
                     username.requestFocus();
                     return;
                 }
                 // 이메일 입력 확인
                 if(email.getText().toString().length() == 0) {
-                    showMsg("이메일을 입력해주세요.");
+                    showAlert("회원가입", "이메일을 입력해주세요.", "확인");
                     email.requestFocus();
                     return;
                 }
                 // 비밀번호 입력 확인
                 int passLength = passwd.getText().toString().length();
                 if(passLength == 0 || passLength < 8) {
-                    if(passLength == 0) showMsg("비밀번호를 입력해주세요.");
-                    if(passLength < 8) showMsg("비밀번호는 최소 8자리 이상 입력해주세요.");
+                    if(passLength == 0) showAlert("회원가입", "비밀번호를 입력해주세요.", "확인");
+                    if(passLength < 8) showAlert("회원가입", "비밀번호는 최소 8자리 이상 입력해주세요.", "확인");
                     passwd.requestFocus();
                     return;
                 }
                 // 비밀번호 확인 입력 확인
                 if(chkpasswd.getText().toString().length() == 0) {
-                    showMsg("비밀번호 확인을 입력해주세요.");
+                    showAlert("회원가입", "비밀번호 확인을 입력해주세요.", "확인");
                     chkpasswd.requestFocus();
                     return;
                 }
                 // 약관동의 확인
                 if(agreeYN.equals("N")) {
-                    showMsg("약관에 동의해주세요.");
+                    showAlert("회원가입", "약관에 동의해주세요.", "확인");
                     return;
                 }
                 // 이메일 중복 확인
                 if(chkemailYN.equals("N")) {
-                    showMsg("이메일 중복 확인을 해주세요.");
+                    showAlert("회원가입", "이메일 중복 확인을 해주세요.", "확인");
                     return;
                 }
                 // 비밀번호 확인
                 if(passwdYN.equals("N")) {
-                    showMsg("비밀번호가 일치하지 않습니다.");
+                    showAlert("회원가입", "비밀번호가 일치하지 않습니다.", "확인");
                     return;
                 }
 
@@ -364,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                 // 이메일 중복 체크
                 if(dbMember.hasEmail(emailTxt).equals("500")) {
                     chkemailYN = "N";
-                    showMsg("이미 등록된 이메일 입니다.");
+                    showAlert("회원가입", "이미 등록된 이메일 입니다.", "확인");
                     return;
                 }
 
@@ -372,7 +370,16 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println();
 
-                showMsg("회원가입이 완료되었습니다.");
+                showAlert("회원가입", "회원가입이 완료되었습니다.", "확인");
+
+
+                // 입력창 초기화
+                username.setText("");
+                email.setText("");
+                passwd.setText("");
+                chkpasswd.setText("");
+                agree .setChecked(false);
+                onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
             }
         });
         /* // 19.09.23, 회원가입 */
@@ -382,6 +389,8 @@ public class MainActivity extends AppCompatActivity {
             String tmp = intToStringWhenUnderTen("GU", i);
             board_cnt[i] = dbBoard.getDataCnt(tmp);
         }
+
+        showMsg("어플리케이션 사용 준비가\n완료되었습니다.");
     }
 
     public void onBackPressed(){
@@ -446,9 +455,30 @@ public class MainActivity extends AppCompatActivity {
         showMsg("paks >>>>>>>>>>> metroList" + metroList);
     }
 
+    public void showAlert(String title, String content, String exit_bt_comment) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+
+        alertDialogBuilder.setTitle(title);
+
+        alertDialogBuilder
+                .setMessage(content)
+                .setCancelable(false)
+                .setNegativeButton(exit_bt_comment,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+    }
     public void showMsg(String str){
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
+
+
 
     private void onlyOneVisible(int index){
         for(int i = 0; i < contents.length; i++) {
@@ -730,7 +760,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = v.getId();
                 for(int i = 0; i < icon_ids.length; i++){
                     if(icon_ids[i] == id) {
-                        showMsg(names[i].getText() + "검색 결과");
+                        //showMsg(names[i].getText() + "검색 결과");
                         ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText(names[i].getText() + " 검색 결과");
                         /* 리스트 뷰 추가 */
                         String boardTitle[] = new String[board_cnt[i + finalOffset]];
@@ -764,7 +794,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewMap1(View v){
-        showMsg("서울시 북부 목록을 표시합니다.");
+        //showMsg("서울시 북부 목록을 표시합니다.");
         initMap('n');
         ((TextView)findViewById(R.id.local_name)).setText("서울시 북부");
         onlyOneVisible(contents_index.MAP_ALL_VIEW.getValue());
@@ -772,14 +802,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewMap2(View v){
-        showMsg("서울시 남부 목록을 표시합니다.");
+        //showMsg("서울시 남부 목록을 표시합니다.");
         initMap('s');
         ((TextView)findViewById(R.id.local_name)).setText("서울시 남부");
         onlyOneVisible(contents_index.MAP_ALL_VIEW.getValue());
         graphic_mode = !graphic_mode;
     }
     public void goHome(View v){
-        showMsg("홈 화면으로 이동합니다.");
+        //showMsg("홈 화면으로 이동합니다.");
         graphic_mode = false;
         onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
     }
@@ -809,18 +839,14 @@ public class MainActivity extends AppCompatActivity {
         String pass = ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).getText().toString();
         Boolean auto_login = ((CheckBox)findViewById(R.id.AUTO_LOGIN)).isChecked();
 
-        showMsg("이메일 : " + email);
-        showMsg("패스워드 : " + pass);
-        showMsg(auto_login?"자동 로그인 활성화":"자동 로그인 비활성화");
-
         String encryptPass = Cipher.getBase64(Cipher.doCipher(pass.getBytes()));
 
         if(email.equals("") || email == null) {
-            showMsg("이메일을 입력해주세요");
+            showAlert("로그인", "이메일을 입력해주세요", "확인");
             return ;
         }
         if(pass.equals("") || pass == null) {
-            showMsg("패스워드를 입력해주세요");
+            showAlert("로그인", "패스워드를 입력해주세요", "확인");
             return ;
         }
 
@@ -845,7 +871,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else {
-            showMsg("이메일과 비밀번호를 확인해주세요.");
+            showAlert("로그인", "이메일과 비밀번호를 확인해주세요", "확인");
             return ;
         }
 
@@ -874,12 +900,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showSettings(View v){
-        showMsg("설정 화면으로 이동합니다.");
+        //showMsg("설정 화면으로 이동합니다.");
         onlyOneVisible(contents_index.SETTINGS_VIEW.getValue());
     }
 
     public void showContract(View v){
-        showMsg("약관 화면으로 이동합니다.");
+       // showMsg("약관 화면으로 이동합니다.");
         onlyOneVisible(contents_index.WEB_VIEW.getValue());
         goURL("https://www.google.com");
     }
@@ -904,7 +930,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void notSupported(View v){
-        showMsg("해당 기능은 현재 버전에서 지원하지 않습니다.");
+        showAlert("안내", "해당 기능은 현재 버전에서 지원하지 않습니다.", "확인");
     }
     public void goQuestions(View v){
         onlyOneVisible(contents_index.QUESTION_VIEW.getValue());
