@@ -405,9 +405,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goURL(String url){
+        /*
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());
         webview.loadUrl(url);
+        */
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadUrl("file:///android_asset/www/"+url);
     }
 
     public void goSignup(View v){
@@ -813,23 +817,24 @@ public class MainActivity extends AppCompatActivity {
         graphic_mode = false;
         onlyOneVisible(contents_index.GRAPHIC_VIEW.getValue());
     }
+
     public void goWebView(View v){
         onlyOneVisible(contents_index.WEB_VIEW.getValue());
         switch (v.getId()){
             case R.id.BT_INFO :
-                goURL("https://www.google.com");
+                goURL("help.html");
                 break;
             case R.id.BT_CONTRACT :
-                goURL("https://www.daum.net");
+                goURL("contract.html");
                 break;
             case R.id.BT_DEVELOPER :
-                goURL("https://www.gnu.org/");
+                goURL("develop.html");
                 break;
             case R.id.BT_FAQ :
-                goURL("https://www.yahoo.com");
+                goURL("faq.html");
                 break;
             default:
-                goURL("https://www.naver.com");
+                return;
         }
     }
 
