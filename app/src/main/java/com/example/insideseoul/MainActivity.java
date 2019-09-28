@@ -4,7 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.SyncAdapterType;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +39,7 @@ import android.widget.Toast;
 
 import com.example.insideseoul.DBResource.DBBoard;
 import com.example.insideseoul.DBResource.DBInit;
+import com.example.insideseoul.DBResource.DBLike;
 import com.example.insideseoul.DBResource.DBMember;
 import com.example.insideseoul.OpenAPI.GuJSONParser;
 import com.example.insideseoul.OpenAPI.MetroJSONParser;
@@ -65,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
     int priv_view;
     int next_view;
 
-
-    /* 19.09.23, 회원가입 // */
+    /* 회원가입 // */
     private EditText username;
     private EditText email;
     private EditText passwd;
@@ -78,14 +81,22 @@ public class MainActivity extends AppCompatActivity {
     private String agreeYN = "N";
     private String passwdYN = "N";
     private String chkemailYN =  "N";
-    DBInit dbInitMember, dbInitBoard;
+    DBInit dbInitMember, dbInitBoard, dbInitLike;
     DBBoard dbBoard;
     DBMember dbMember;
+    DBLike dbLike;
     Cipher cipher;
 
     private final Handler handler = new Handler();
     private static final String WEB_VIEW_PATH = "file:///android_asset/www/index.html";
-    /* // 19.09.23, 회원가입 */
+
+    // 자동 로그인
+    private SharedPreferences sharedPreferences;
+
+    private boolean isAutoLogin;
+    private String spID;
+    private String spPW;
+    /* // 회원가입 */
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
                             R.id.local_line_05, R.id.local_line_06, R.id.local_line_07, R.id.local_line_08,
@@ -184,10 +195,17 @@ public class MainActivity extends AppCompatActivity {
         dbInitMember = new DBInit(this, "tbl_member", null, 1);
         dbMember = new DBMember(this, "tbl_member", null, 1);
 
-        /* 19.09.25, DB 설정 */
+        /* DB 설정 */
         dbInitBoard = new DBInit(this, "tbl_board", null, 1);
         dbBoard = new DBBoard(this, "tbl_board", null, 1, 2);
-        /* 19.09.25, DB 설정 */
+        /* DB 설정 */
+
+        /* 좋아요 설정 */
+        dbInitLike = new DBInit(this, "tbl_like", null, 1);
+        dbLike = new DBLike(this,"tbl_like", null, 1);
+
+        // 자동로그인 설정값 불러오기
+        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
 
         // editText 설정
         username = (EditText) findViewById(R.id.INPUT_USERNAME);
@@ -371,7 +389,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println();
 
                 showAlert("회원가입", "회원가입이 완료되었습니다.", "확인");
-
 
                 // 입력창 초기화
                 username.setText("");
@@ -622,6 +639,24 @@ public class MainActivity extends AppCompatActivity {
                 detail.setText(subject);
                 img_right.requestFocus();
 
+                // 좋아요 기능 구현
+                getShardPreferencesLoad(); // sharedPreferences 값 호출
+                if(isAutoLogin || (!spID.equals(""))) {
+                    View like = findViewById(R.id.LIKEIT);
+                    Button bt_like = findViewById(R.id.BTN_LIKEIT);
+                    // 로그인 상태인 경우 좋아요 상태인지 체크
+                    if(dbLike.isLike(spID, strIdx)) {
+                        like.setBackgroundResource(R.drawable.likeit);
+                        like.setTag(R.drawable.likeit);
+                        bt_like.setTag(strIdx);
+                    }
+                    else {
+                        like.setBackgroundResource(R.drawable.dont_like);
+                        like.setTag(R.drawable.dont_like);
+                        bt_like.setTag(strIdx);
+                    }
+                }
+
                 final String content = intro_content;
                 System.out.println("paks >>>>>>>>>>>>> content: " + content);
                 // 웹뷰 입력
@@ -782,8 +817,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
+                        clearList();
                         setListItem(boardTitle, boardIdx);
-                        //clearList();
                     }
                 }
                 onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
@@ -881,7 +916,10 @@ public class MainActivity extends AppCompatActivity {
         if(isCorrect) login_success = true;
         else login_success = false;
 
-        if(login_success) onlyOneVisible(next_view);
+        if(login_success) {
+            onlyOneVisible(next_view);
+            setSharedPreferencesSave(email, pass, auto_login);
+        }
     }
 
     public void logout(View v) {
@@ -889,10 +927,37 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.INPUT_LOGIN_EMAIL)).setText("");
         ((TextView)findViewById(R.id.INPUT_LOGIN_PASSWORD)).setText("");
         login_success = false;
+        // 자동 로그인 초기화
+        setSharedPreferencesSave("","",false);
         onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
     }
 
     public void showMypage(View v) {
+        // 자동 로그인 체크
+        getShardPreferencesLoad();
+        if(isAutoLogin || (!spID.equals(""))) {
+            String email = spID;
+            String pass = spPW;
+            String encryptPass = Cipher.getBase64(Cipher.doCipher(pass.getBytes()));
+
+            // 로그인 확인 됬을 때 처리. (redoma)
+            if(dbMember.isMember(email, encryptPass)) {
+                JSONObject member = dbMember.getData(email, encryptPass);
+                String getName = "";
+                String getEmail = "";
+                try {
+                    getName = (String)member.get("name");
+                    getEmail = (String)member.get("email");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ((TextView)findViewById(R.id.user_name)).setText(getName);
+                ((TextView)findViewById(R.id.user_email)).setText(getEmail);
+
+                login_success = true;
+            }
+        }
+        // 자동 로그인 체크
         if (login_success) {
             onlyOneVisible(contents_index.MYPAGE_VIEW.getValue());
         }else{
@@ -939,8 +1004,88 @@ public class MainActivity extends AppCompatActivity {
         onlyOneVisible(contents_index.QUESTION_VIEW.getValue());
     }
     public void likeit(View v){
-        View like = findViewById(R.id.LIKEIT);
-        like.setBackgroundResource(R.drawable.likeit);
-        showMsg("좋아요를 누르셨습니다.");
+        // 로그인 상태인경우 (자동로그인 상태거나, 아이디 값이 있는경우)
+        if(isAutoLogin || (!spID.equals(""))) {
+            View like = findViewById(R.id.LIKEIT);
+            Button bt_like = findViewById(R.id.BTN_LIKEIT);
+            System.out.println("paks >>>>>>>>>>> bt_like.getTag(): " + bt_like.getTag());
+            int btLikeIdx = (int) bt_like.getTag();
+            // 좋아요 상태인 경우
+            if(like.getTag().equals(R.drawable.likeit)) {
+                try {
+                    dbLike.delete(spID, btLikeIdx);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                like.setBackgroundResource(R.drawable.dont_like);
+                like.setTag(R.drawable.dont_like);
+                showMsg("좋아요를 취소하셨습니다.");
+            }
+            // 좋아요 상태가 아닌 경우
+            else {
+                dbLike.insert(spID, btLikeIdx);
+                like.setBackgroundResource(R.drawable.likeit);
+                like.setTag(R.drawable.likeit);
+                showMsg("좋아요를 누르셨습니다.");
+            }
+        } else {
+            showAlert("Like","해당기능을 이용하기 위해서는 로그인을 하셔야 합니다","확인");
+            onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
+        }
+    }
+
+    // 설정값을 저장하는 함수
+    private void setSharedPreferencesSave(String email, String pass, boolean auto_login) {
+        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
+        // 저장시킬 이름이 이미 존재하면 덮어씌움
+        editor.putBoolean("SAVE_LOGIN_DATA", auto_login);
+        editor.putString("ID", email);
+        editor.putString("PWD", pass);
+
+        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
+        editor.apply();
+    }
+
+    // 설정값을 불러오는 함수
+    private void getShardPreferencesLoad() {
+        // SharedPreferences 객체.get타입( 저장된 이름, 기본값 )
+        // 저장된 이름이 존재하지 않을 시 기본값
+        isAutoLogin = sharedPreferences.getBoolean("SAVE_LOGIN_DATA", false);
+        spID = sharedPreferences.getString("ID", "");
+        spPW = sharedPreferences.getString("PWD", "");
+    }
+
+    // mypage => 좋아요
+    public void showMyLike(View v) {
+        JSONArray jsonArray = dbLike.getRecentData(spID);
+        int totalCnt = jsonArray.length();
+
+        String[] boardTitle = new String[totalCnt];
+        int[] boardIdx = new int[totalCnt];
+
+        for(int i = 0; i < totalCnt; i ++) {
+            try {
+                JSONObject jobj = (JSONObject) jsonArray.get(i);
+
+                int board_idx = Integer.parseInt((String)jobj.get("board_idx"));
+                boardIdx[i] = board_idx;
+                boardTitle[i] = (String)dbBoard.getOneData(board_idx).get("subject");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // 리스트 초기화 후 로드
+        clearList();
+        setListItem(boardTitle, boardIdx);
+        onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
+    }
+
+    // mypage => 관심지역
+    public void showFavLocation(View v) {
+        // 작성중 쿼리문 필요
     }
 }
