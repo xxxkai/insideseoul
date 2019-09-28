@@ -21,7 +21,7 @@ import java.util.List;
 public class MetroJSONParser extends AsyncTask<Void, Integer, List> {
     // OpenAPI key
     private static final String clientKey = "5a74686b4172656437387247756668";
-    // 서울시 주민등록인구 (구별) 통계
+    // 서울시 지하철호선별 역별 승하차 인원 정보
     // https://data.seoul.go.kr/dataList/datasetView.do?infId=OA-12914&srvType=S&serviceKind=1&currentPageNo=1&searchValue=&searchKey=null
     private String serviceKey = "CardSubwayStatsNew";
     private static final int endOfStation = 300;

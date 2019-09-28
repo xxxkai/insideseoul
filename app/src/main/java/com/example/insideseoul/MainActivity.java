@@ -6,16 +6,22 @@ import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Adapter;
@@ -82,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     DBBoard dbBoard;
     DBMember dbMember;
     Cipher cipher;
+
+    private final Handler handler = new Handler();
+    private static final String WEB_VIEW_PATH = "file:///android_asset/www/index.html";
     /* // 19.09.23, 회원가입 */
 
     int[] line_ids = { 		R.id.local_line_01, R.id.local_line_02, R.id.local_line_03, R.id.local_line_04,
@@ -220,6 +229,31 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // 값 변경시 다시 이메일 중복 확인 필요
                 chkemailYN = "N";
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        // 비밀번호 체크
+        passwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String password = passwd.getText().toString();
+                String chkpassword = chkpasswd.getText().toString();
+
+                if(password.equals(chkpassword)) {
+                    passwdYN = "Y";
+                } else {
+                    passwdYN = "N";
+                }
             }
 
             @Override
@@ -518,17 +552,30 @@ public class MainActivity extends AppCompatActivity {
                 // 상세 화면으로 이동
                 onlyOneVisible(contents_index.RESULT_DETAIL_VIEW.getValue());
                 String strText = (String) parent.getItemAtPosition(position) ;
+                String subject = "";
                 int strIdx = tmpIdx[position];
-                showMsg(strText);
+                // showMsg(strText);
 
                 JSONObject jobj = dbBoard.getOneData(strIdx);
-                String imagePath1 = "sample.jpg";
-                String imagePath2 = "sample.jpg";
-                String intro_content = "sample";
+                String imagePath1 = "";
+                String imagePath2 = "";
+                String intro_content = "";
                 try {
-                    //if(((String)jobj.get("file_path1")).equals("") || (String)jobj.get("file_path1") == null) imagePath1 = (String)jobj.get("file_path1");
-                    //if(((String)jobj.get("file_path2")).equals("") || (String)jobj.get("file_path2") == null) imagePath2 = (String)jobj.get("file_path2");
-                    if(((String)jobj.get("intro_content")).equals("") || (String)jobj.get("intro_content") == null) intro_content = (String)jobj.get("intro_content");
+                    String filePath1 = ((String)jobj.get("file_path1"));
+                    String filePath2 = ((String)jobj.get("file_path2"));
+                    String content = ((String)jobj.get("intro_content"));
+                    String subject1 = ((String)jobj.get("subject"));
+                    String startdate = ((String)jobj.get("startdate"));
+                    String enddate = ((String)jobj.get("enddate"));
+                    // 확인용
+                    // System.out.println("filePath1: " + filePath1 + " / " + "filePath2: " + filePath2 + " / " + "content: " + content + " / " + "subject1: " + subject1 + " / " + "startdate: " + startdate + " / " + "enddate: " + enddate);
+                    if(!(filePath1.equals("") || filePath1== null)) imagePath1 = filePath1;
+                    if(!(filePath2.equals("") || filePath2 == null)) imagePath2 = filePath2;
+                    if(!(content.equals("") || content == null)) intro_content = content;
+                    if(subject1.length() != 0) subject = "subject";
+                    subject += "\n" + startdate + " ~ ";
+                    if(enddate.length() != 0) subject += enddate;
+                    else subject += "진행중";
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -536,24 +583,62 @@ public class MainActivity extends AppCompatActivity {
                 // 상세 화면의 요소들 설정
                 ImageView img_right = findViewById(R.id.POSTER_RIGHT);
                 ImageView img_left = findViewById(R.id.POSTER_LEFT);
-                // getFromImgAssets(imagePath1 ,img_right);
-                // getFromImgAssets(imagePath2 ,img_left);
+                WebView webView = findViewById(R.id.WEB_VIEW_DETAIL);
+                // 이미지 삽입
+                if(!imagePath1.equals("")) getFromImgAssets(imagePath1 ,img_right);
+                if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
                 TextView detail = findViewById(R.id.OUTPUT_DETAIL);
-                detail.setText(intro_content);
+                // 서울시 종로구 XX축제 \n2019/XX/XX~2019/XX/XX
+                detail.setText(subject);
+                img_right.requestFocus();
+
+                final String content = intro_content;
+                System.out.println("paks >>>>>>>>>>>>> content: " + content);
+                // 웹뷰 입력
+                webView.getSettings().setJavaScriptEnabled(true); // 자바스크립트 ON
+                webView.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public void onPageFinished(WebView view, String url) {
+                        // 여기서 WebView의 데이터를 가져오는 작업을 한다.
+                        if (url.equals(WEB_VIEW_PATH)) {
+
+                            String script = "javascript:function afterLoad() {"
+                                    + "document.getElementById('content_txt').innerHTML = \"" + content + "\";"
+                                    + "};"
+                                    + "afterLoad();";
+                            view.loadUrl(script);
+                        }
+                    }
+                });
+                webView.loadUrl(WEB_VIEW_PATH);
+
             }
         }) ;
-
         return true;
     }
 
     // 추후에 이미지 추가 요망 (redoma)
-    /*public void getFromImgAssets(String fileName, ImageView imageView){
+    public void getFromImgAssets(String fileName, ImageView imageView){
+        AssetManager am = getResources().getAssets() ;
+        InputStream is = null ;
         try {
-            imageView.setImageResource(R.drawable.sample);
+            //imageView.setImageResource(R.drawable.sample);
+            is = am.open(fileName);
+            Bitmap bm = BitmapFactory.decodeStream(is);
+            imageView.setImageBitmap(bm);
+            is.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+
+        if (is != null) {
+            try {
+                is.close() ;
+            } catch (Exception e) {
+                e.printStackTrace() ;
+            }
+        }
+    }
 
     // int 값이 0 이하인 경우 '0' 추가
     public String intToStringWhenUnderTen(String prefix, int num) {
@@ -579,6 +664,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView[] names = new TextView[name_ids.length];
 
         Random rand = new Random();
+        // 북부, 남부 체크
         int alert_num = 0; // 이벤트 개수
         int congestion = 0; // 혼잡도
         int visible_icon_count = 0; // 표시할 아이콘의 수
@@ -622,9 +708,13 @@ public class MainActivity extends AppCompatActivity {
 
         // 아이콘 데이터 구성
         int offset = GraphicLayout.getNameStartIndex(local);
+        final int finalOffset = offset;
         for(int i = 0; i < visible_icon_count; i++){
             // 더미데이터 생성
-            alert_num = board_cnt[i];
+            System.out.println("paks >>>>>>>>>>>>> offset: " + offset);
+            // 남부 지방인 경우
+            if(visible_icon_count == 11) alert_num = board_cnt[i + 13];
+            else alert_num = board_cnt[i];
             congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
 
@@ -647,12 +737,12 @@ public class MainActivity extends AppCompatActivity {
                         showMsg(names[i].getText() + "검색 결과");
                         ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText(names[i].getText() + " 검색 결과");
                         /* 리스트 뷰 추가 */
-                        String boardTitle[] = new String[board_cnt[i]];
-                        int boardIdx[] = new int[board_cnt[i]];
+                        String boardTitle[] = new String[board_cnt[i + finalOffset]];
+                        int boardIdx[] = new int[board_cnt[i + finalOffset]];
                         for(int j = 0; j < board_cnt[i]; j ++) {
                             JSONArray jsonBoard;
                             try {
-                                jsonBoard = dbBoard.getData(board_cnt[i], intToStringWhenUnderTen("GU", i));
+                                jsonBoard = dbBoard.getData(board_cnt[i], intToStringWhenUnderTen("GU", i + finalOffset));
                                 //String title = (String)((JSONObject)jsonBoard.get(j)).get("subject");
                                 //int idx = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
                                 boardTitle[j] = (String)((JSONObject)jsonBoard.get(j)).get("subject");
