@@ -133,13 +133,12 @@ public class MainActivity extends AppCompatActivity {
                         R.id.local_name_10, R.id.local_name_11, R.id.local_name_12, R.id.local_name_13, R.id.local_name_14,
                         R.id.local_name_15, R.id.local_name_16, R.id.local_name_17, R.id.local_name_18, R.id.local_name_19,
                         R.id.local_name_20, R.id.local_name_21, R.id.local_name_22, R.id.local_name_23, R.id.local_name_24
-    };
+    };  
     int[] contents_list = { R.id.graphic_view, R.id.map_all_view,
                             R.id.settings_view, R.id.mypage_view,
-                            R.id.language_view, R.id.signup_view,
-                            R.id.web_view, R.id.search_result_view,
-                            R.id.result_detail_view, R.id.question_view,
-                            R.id.login_view};
+                            R.id.signup_view, R.id.web_view,
+                            R.id.search_result_view, R.id.result_detail_view,
+                            R.id.question_view, R.id.login_view};
 
     // 게시글 숫자
     int[] board_cnt = new int[25];
@@ -147,10 +146,9 @@ public class MainActivity extends AppCompatActivity {
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), MAP_ALL_VIEW(1),
         SETTINGS_VIEW(2), MYPAGE_VIEW(3),
-        LANGUAGE_VIEW(4), SIGNUP_VIEW(5),
-        WEB_VIEW(6), SEARCH_RESULT_VIEW(7),
-        RESULT_DETAIL_VIEW(8), QUESTION_VIEW(9),
-        LOGIN_VIEW(10);
+        SIGNUP_VIEW(4), WEB_VIEW(5),
+        SEARCH_RESULT_VIEW(6), RESULT_DETAIL_VIEW(7),
+        QUESTION_VIEW(8), LOGIN_VIEW(9);
 
         private int value;
         private CONTENTS_INDEX(int value) {
@@ -457,24 +455,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
 */
-        //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
-        GuJSONParser guJSONParser = new GuJSONParser();
-        MetroJSONParser metroJSONParser = new MetroJSONParser();
-
-        List guList = new ArrayList<Integer>();
-        List metroList = new ArrayList<Integer>();
-        try {
-            guList = guJSONParser.execute().get();
-            metroList = metroJSONParser.execute().get();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /* // 실제 파싱된 데이터 불러오기 */
-
-
-        /* 값 확인용 // */
-        showMsg("paks >>>>>>>>>>> guList" + guList);
-        showMsg("paks >>>>>>>>>>> metroList" + metroList);
+        return;
     }
 
     public void showAlert(String title, String content, String exit_bt_comment) {
@@ -630,11 +611,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // 상세 화면의 요소들 설정
                 ImageView img_right = findViewById(R.id.POSTER_RIGHT);
-                ImageView img_left = findViewById(R.id.POSTER_LEFT);
+                //ImageView img_left = findViewById(R.id.POSTER_LEFT);
                 WebView webView = findViewById(R.id.WEB_VIEW_DETAIL);
                 // 이미지 삽입
                 if(!imagePath1.equals("")) getFromImgAssets(imagePath1 ,img_right);
-                if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
+                //if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
                 TextView detail = findViewById(R.id.OUTPUT_DETAIL);
                 // 서울시 종로구 XX축제 \n2019/XX/XX~2019/XX/XX
                 detail.setText(subject);

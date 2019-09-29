@@ -8,21 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:orientation="vertical">
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+
         <TextView
             android:id="@+id/OUTPUT_RESULT_TITLE"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="검색결과"
             android:textStyle="bold"
             android:textColor="#515252"
             android:textSize="20dp"
             android:gravity="center"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
