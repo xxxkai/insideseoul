@@ -456,6 +456,8 @@ public class DBBoard extends SQLiteOpenHelper {
         image1[25] = "GU24.jpg";
         image2[25] = "";
         gu[25] = "GU24";
+
+
     }
 
     // 샘플 데이터

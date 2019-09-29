@@ -1049,21 +1049,29 @@ public class MainActivity extends AppCompatActivity {
         String[] boardTitle = new String[totalCnt];
         int[] boardIdx = new int[totalCnt];
 
-        for(int i = 0; i < totalCnt; i ++) {
-            try {
-                JSONObject jobj = (JSONObject) jsonArray.get(i);
+        if(totalCnt != 0) {
+            // 값이 있는경우
+            for(int i = 0; i < totalCnt; i ++) {
+                try {
+                    JSONObject jobj = (JSONObject) jsonArray.get(i);
 
-                int board_idx = Integer.parseInt((String)jobj.get("board_idx"));
-                boardIdx[i] = board_idx;
-                boardTitle[i] = (String)dbBoard.getOneData(board_idx).get("subject");
-            } catch (Exception e) {
-                e.printStackTrace();
+                    int board_idx = Integer.parseInt((String)jobj.get("board_idx"));
+                    boardIdx[i] = board_idx;
+                    boardTitle[i] = (String)dbBoard.getOneData(board_idx).get("subject");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            // 리스트 초기화 후 로드
+            clearList();
+            ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText(" 좋아요 목록");
+            setListItem(boardTitle, boardIdx);
+            onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
+        } else {
+            // 값이 없는경우
+            showAlert("알려드립니다.", "좋아요한 글이 없습니다.", "확인");
         }
-        // 리스트 초기화 후 로드
-        clearList();
-        setListItem(boardTitle, boardIdx);
-        onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
+
     }
 
     // mypage => 관심지역
