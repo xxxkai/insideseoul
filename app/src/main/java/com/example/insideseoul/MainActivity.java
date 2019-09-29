@@ -1073,8 +1073,6 @@ public class MainActivity extends AppCompatActivity {
 
         int totalCnt = jsonArray.length();
         String[] favTitle = new String[totalCnt];
-        String[] boardTitle = new String[totalCnt];
-        int[] boardIdx = new int[totalCnt];
 
         // 값이 없는 경우
         if(totalCnt == 0) {
@@ -1102,8 +1100,8 @@ public class MainActivity extends AppCompatActivity {
             String resultText = favRank(favTitle);
             // 해당 구의 토탈값
             int tmpCnt = dbBoard.getDataCnt(resultText);
-            System.out.println("resultTextresultText: " + resultText);
-            System.out.println("tmpCnt: " + tmpCnt);
+            String[] boardTitle = new String[tmpCnt];
+            int[] boardIdx = new int[tmpCnt];
 
             ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText("관심지역 리스트");
             /* 리스트 뷰 추가 */
@@ -1115,8 +1113,6 @@ public class MainActivity extends AppCompatActivity {
                     //int idx = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
                     boardTitle[j] = (String)((JSONObject)jsonBoard.get(j)).get("subject");
                     boardIdx[j] = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
-                    System.out.println("boardTitle["+j+"]: " + boardTitle[j]);
-                    System.out.println("boardIdx["+j+"]: " + boardIdx[j]);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -1124,9 +1120,7 @@ public class MainActivity extends AppCompatActivity {
 
             clearList();
             setListItem(boardTitle, boardIdx);
-            System.out.println("qweqawfiojasifhasklflfasklklfjasklfjaskl111111111111fj");
             onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
-            System.out.println("qweqawfiojasifhasklflfasklklfjasklfjasklf2222222222222222222j");
         }
     }
 
