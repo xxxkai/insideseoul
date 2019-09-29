@@ -112,6 +112,37 @@ public class DBBoard extends SQLiteOpenHelper {
         return rowObject;
     }
 
+    // 해당구의 한 데이터 호출
+    public JSONObject getOneDataByGu(String guType) {
+        Log.i("guType", String.valueOf(guType));
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + tb_name + " WHERE gu_type = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(guType)});
+        cursor.moveToPosition(0);
+
+        int totalColumn = cursor.getColumnCount();
+
+        System.out.println("getData from Board: " + totalColumn);
+        JSONObject rowObject = new JSONObject();
+
+        for (int i = 0; i < totalColumn; i++) {
+            if (cursor.getColumnName(i) != null) {
+                try {
+                    if (cursor.getString(i) != null) {
+                        rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                    } else {
+                        rowObject.put(cursor.getColumnName(i), "");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        cursor.close();
+        db.close();
+        return rowObject;
+    }
+
     // 해당구의 데이터 총량 불러오기
     public int getDataCnt(String guType) {
         Log.i("guType", String.valueOf(guType));

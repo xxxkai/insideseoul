@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         // 혼잡도 선행 계산
         congestionLevel = getCongestionLevel();
 
-        /* 19.09.23, 회원가입 // */
+        /* 회원가입 // */
         cipher = new Cipher();
         dbInitMember = new DBInit(this, "tbl_member", null, 1);
         dbMember = new DBMember(this, "tbl_member", null, 1);
@@ -398,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
                 onlyOneVisible(contents_index.LOGIN_VIEW.getValue());
             }
         });
-        /* // 19.09.23, 회원가입 */
+        /* // 회원가입 */
 
         // 구 마다 리스트 불러오기
         for(int i = 0; i < 25; i ++) {
@@ -1069,5 +1069,109 @@ public class MainActivity extends AppCompatActivity {
     // mypage => 관심지역
     public void showFavLocation(View v) {
         // 작성중 쿼리문 필요
+        JSONArray jsonArray = dbLike.getFavLocation(spID);
+
+        int totalCnt = jsonArray.length();
+        String[] favTitle = new String[totalCnt];
+
+        // 값이 없는 경우
+        if(totalCnt == 0) {
+            // 값이 없는 경우
+            showAlert("알려드립니다.", "관심지역이 없습니다.", "확인");
+        } else {
+            // 값이 있는 경우
+            for(int i = 0; i < totalCnt; i ++) {
+                try {
+                    JSONObject jobj = (JSONObject) jsonArray.get(i);
+                    int board_idx = Integer.parseInt((String)jobj.get("board_idx"));
+
+                    JSONObject tmpObj = dbBoard.getOneData(board_idx);
+                    String tmpGuType = (String)tmpObj.get("gu_type");
+                    favTitle[i] = tmpGuType;
+
+                    System.out.println("tsetsetsetsetset: " + favTitle[i]);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // 가장 많은 좋아요 게시글 추출
+            String resultText = favRank(favTitle);
+            // 해당 구의 토탈값
+            int tmpCnt = dbBoard.getDataCnt(resultText);
+            String[] boardTitle = new String[tmpCnt];
+            int[] boardIdx = new int[tmpCnt];
+
+            ((TextView)findViewById(R.id.OUTPUT_RESULT_TITLE)).setText("관심지역 리스트");
+            /* 리스트 뷰 추가 */
+            for(int j = 0; j < tmpCnt; j ++) {
+                JSONArray jsonBoard;
+                try {
+                    jsonBoard = dbBoard.getData(tmpCnt, resultText);
+                    //String title = (String)((JSONObject)jsonBoard.get(j)).get("subject");
+                    //int idx = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
+                    boardTitle[j] = (String)((JSONObject)jsonBoard.get(j)).get("subject");
+                    boardIdx[j] = Integer.parseInt((String)((JSONObject)jsonBoard.get(j)).get("idx"));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            clearList();
+            setListItem(boardTitle, boardIdx);
+            onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
+        }
     }
+
+    public String favRank(String[] list) {
+        int[] intList = new int[25];
+        int maxIdx = 0;
+        int maxGu = 0;
+
+        System.out.println("qweqweqweqwe > " + list.length);
+
+        for(int i = 0; i < list.length; i ++) {
+            if(list[i].equals("GU00")) intList[0] += 1;
+            if(list[i].equals("GU01")) intList[1] += 1;
+            if(list[i].equals("GU02")) intList[2] += 1;
+            if(list[i].equals("GU03")) intList[3] += 1;
+            if(list[i].equals("GU04")) intList[4] += 1;
+            if(list[i].equals("GU05")) intList[5] += 1;
+            if(list[i].equals("GU06")) intList[6] += 1;
+            if(list[i].equals("GU07")) intList[7] += 1;
+            if(list[i].equals("GU08")) intList[8] += 1;
+            if(list[i].equals("GU09")) intList[9] += 1;
+            if(list[i].equals("GU10")) intList[10] += 1;
+            if(list[i].equals("GU11")) intList[11] += 1;
+            if(list[i].equals("GU12")) intList[12] += 1;
+            if(list[i].equals("GU13")) intList[13] += 1;
+            if(list[i].equals("GU14")) intList[14] += 1;
+            if(list[i].equals("GU15")) intList[15] += 1;
+            if(list[i].equals("GU16")) intList[16] += 1;
+            if(list[i].equals("GU17")) intList[17] += 1;
+            if(list[i].equals("GU18")) intList[18] += 1;
+            if(list[i].equals("GU19")) intList[19] += 1;
+            if(list[i].equals("GU20")) intList[20] += 1;
+            if(list[i].equals("GU21")) intList[21] += 1;
+            if(list[i].equals("GU22")) intList[22] += 1;
+            if(list[i].equals("GU23")) intList[23] += 1;
+            if(list[i].equals("GU24")) intList[24] += 1;
+        }
+
+        for(int i = 0; i < 25; i ++) {
+            System.out.println("paks >>>>>> favRank: "+i+" > " + intList[i]);
+            if(intList[i] > maxIdx) {
+                maxIdx = intList[i];
+                maxGu = i;
+            }
+            System.out.println("paks >>>>>> maxGu > " + maxGu);
+        }
+
+        String tmp = intToStringWhenUnderTen("GU" , maxGu);
+        System.out.println("paks >>>>>>>>>>>>>> tmp: " + tmp);
+
+        return tmp;
+    }
+
 }

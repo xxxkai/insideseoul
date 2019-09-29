@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 public class DBLike extends SQLiteOpenHelper {
     Context context;
-    MainActivity mainActivity;
     String tb_name;
     int version;
     SQLiteDatabase.CursorFactory factory;
@@ -142,10 +141,9 @@ public class DBLike extends SQLiteOpenHelper {
     public JSONArray getFavLocation(String email) {
         // 읽기가 가능하게 DB 열기
         SQLiteDatabase db = getReadableDatabase();
-        String result = "";
 
         // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM " + tb_name + " WHERE email = '" + email + "'", null);
+        Cursor cursor = db.rawQuery("SELECT board_idx FROM " + tb_name + "  WHERE email = '" + email + "'", null);
         JSONArray resultSet = new JSONArray();
         cursor.moveToLast();
         int index = 0;
@@ -153,6 +151,8 @@ public class DBLike extends SQLiteOpenHelper {
 
             int totalColumn = cursor.getColumnCount();
             JSONObject rowObject = new JSONObject();
+
+            System.out.println("paks >>>>>>>>>>> DBLike totalColumn: " + totalColumn);
 
             for (int i = 0; i < totalColumn; i++) {
                 if (cursor.getColumnName(i) != null) {

@@ -87,6 +87,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:onClick="showFavLocation"
                 android:id="@+id/BT_FAVORITE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
