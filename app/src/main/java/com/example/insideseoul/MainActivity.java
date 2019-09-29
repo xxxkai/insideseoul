@@ -615,6 +615,7 @@ public class MainActivity extends AppCompatActivity {
                 WebView webView = findViewById(R.id.WEB_VIEW_DETAIL);
                 // 이미지 삽입
                 if(!imagePath1.equals("")) getFromImgAssets(imagePath1 ,img_right);
+                else img_right.setImageResource(R.drawable.logo_512);
                 //if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
                 TextView detail = findViewById(R.id.OUTPUT_DETAIL);
                 // 서울시 종로구 XX축제 \n2019/XX/XX~2019/XX/XX
