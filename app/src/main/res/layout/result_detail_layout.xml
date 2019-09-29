@@ -8,36 +8,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Space
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="50dp"
+            android:text="상세 정보"
+            android:textStyle="bold"
+            android:textColor="#515252"
+            android:textSize="20dp"
+            android:gravity="center"/>
 
-        <View
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#e1f3f5"/>
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/dot_line" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/POSTER_LEFT"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="49"
-                app:srcCompat="@drawable/logo_512_2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/dot_line_2" />
-
 
             <ImageView
                 android:id="@+id/POSTER_RIGHT"
@@ -62,24 +54,45 @@
             <TextView
                 android:id="@+id/OUTPUT_DETAIL"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:layout_weight="80"
                 android:textSize="18dp"
                 android:text="서울시 종로구 XX축제 \n2019/XX/XX~2019/XX/XX" />
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/dot_line_3" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#e1f3f5"/>
+
             <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content">
-                <View
-                    android:id="@+id/LIKEIT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dont_like" />
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"/>
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:orientation="vertical">
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"/>
+                        <View
+                            android:id="@+id/LIKEIT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dont_like" />
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
 
                 <Button
                     android:onClick="likeit"
@@ -91,31 +104,19 @@
 
             </FrameLayout>
 
-
         </LinearLayout>
 
-        <LinearLayout
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="49"
-                android:background="@drawable/detail_tap" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="49"
-                android:background="@drawable/intro_tap" />
-        </LinearLayout>
-
+            android:layout_height="45dp"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="상세정보"
+            android:background="#99d8de" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
         <WebView
             android:id="@+id/WEB_VIEW_DETAIL"
             android:layout_width="match_parent"

@@ -31,18 +31,34 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="수신 이메일" />
+            android:text="  수신 이메일" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+
         <EditText
             android:id="@+id/INPUT_RECEIVE_EMAIL"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_weight="96"
             android:ems="10"
             android:inputType="textPersonName"
             android:background="@drawable/photo_frame2"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp"/>
@@ -52,23 +68,45 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="문의 내용"
+            android:text="  문의 내용"
             />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
 
-        <EditText
-            android:id="@+id/INPUT_SEND_MSG"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:background="@drawable/photo_frame2"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+
+            <EditText
+                android:id="@+id/INPUT_SEND_MSG"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                android:layout_weight="96"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:background="@drawable/photo_frame2"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right">
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
@@ -79,7 +117,10 @@
             android:background="@drawable/button_frame"
             android:onClick="notSupported"
             android:text="보내기" />
-
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

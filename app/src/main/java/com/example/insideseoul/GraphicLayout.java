@@ -17,7 +17,7 @@ public class GraphicLayout {
     };
     static String  Colors[] = {
             // <<<여유 - 혼잡>>>
-            "#99d8de", "#23b6b6", "#089e9a"
+            "#99d8de", "#23b6b6", "#047b77"
     };
 
     public static int getLocalCount(char direction){

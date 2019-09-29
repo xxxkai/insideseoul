@@ -629,11 +629,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // 상세 화면의 요소들 설정
                 ImageView img_right = findViewById(R.id.POSTER_RIGHT);
-                ImageView img_left = findViewById(R.id.POSTER_LEFT);
+                //ImageView img_left = findViewById(R.id.POSTER_LEFT);
                 WebView webView = findViewById(R.id.WEB_VIEW_DETAIL);
                 // 이미지 삽입
                 if(!imagePath1.equals("")) getFromImgAssets(imagePath1 ,img_right);
-                if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
+                //if(!imagePath2.equals("")) getFromImgAssets(imagePath2 ,img_left);
                 TextView detail = findViewById(R.id.OUTPUT_DETAIL);
                 // 서울시 종로구 XX축제 \n2019/XX/XX~2019/XX/XX
                 detail.setText(subject);
