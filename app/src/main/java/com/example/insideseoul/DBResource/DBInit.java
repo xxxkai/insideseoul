@@ -36,6 +36,7 @@ public class DBInit extends SQLiteOpenHelper {
 
         StringBuffer sb = new StringBuffer();
 
+        Log.i("paks >>>>>>>>>>>>>>> DBInit: ", name);
         if(!isTableExists(name,true)) {
             Log.i("paks >>>>>>>>>>>>>>> doesDatabaseExist: ","DB Empty");
             if(name.equals("tbl_member")) {
