@@ -307,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
                     chkemailYN = "N";
                     showAlert("회원가입", "이메일을 먼저 입력해주세요.", "확인");
                 } else {
-                    System.out.println("paks >>>>>>>>>>>>>>>> member.validate(emailTxt): " + dbMember.validate(emailTxt));
                     if(!dbMember.validate(emailTxt)) {
                         chkemailYN = "N";
                         showAlert("회원가입", "이메일을 형식을 확인해주세요.", "확인");
@@ -382,11 +381,7 @@ public class MainActivity extends AppCompatActivity {
                     showAlert("회원가입", "이미 등록된 이메일 입니다.", "확인");
                     return;
                 }
-
                 dbMember.insert(emailTxt, passwordTxt, "Y", nameTxt, "USR");
-
-                System.out.println();
-
                 showAlert("회원가입", "회원가입이 완료되었습니다.", "확인");
 
                 // 입력창 초기화
@@ -641,7 +636,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 final String content = intro_content;
-                System.out.println("paks >>>>>>>>>>>>> content: " + content);
                 // 웹뷰 입력
                 webView.getSettings().setJavaScriptEnabled(true); // 자바스크립트 ON
                 webView.setWebViewClient(new WebViewClient() {
@@ -759,13 +753,11 @@ public class MainActivity extends AppCompatActivity {
         final int finalOffset = offset;
         for(int i = 0; i < visible_icon_count; i++){
             // 더미데이터 생성
-            System.out.println("paks >>>>>>>>>>>>> offset: " + offset);
             // 남부 지방인 경우
-            if(visible_icon_count == 11) alert_num = board_cnt[i + 13];
+            if(visible_icon_count == 11) alert_num = board_cnt[i + 14];
             else alert_num = board_cnt[i];
             congestion = rand.nextInt()%3;
             alert_num = (alert_num<0)?(alert_num*-1):alert_num;
-
 
             alerts[i].setText(""+alert_num);
             names[i].setText(GraphicLayout.getName(i+offset));
@@ -958,7 +950,7 @@ public class MainActivity extends AppCompatActivity {
     public void showContract(View v){
        // showMsg("약관 화면으로 이동합니다.");
         onlyOneVisible(contents_index.WEB_VIEW.getValue());
-        goURL("https://www.google.com");
+        goURL("contract.html");
     }
 
     public void changeSystemLanguage(View v){
@@ -991,7 +983,6 @@ public class MainActivity extends AppCompatActivity {
         if(isAutoLogin || (!spID.equals(""))) {
             View like = findViewById(R.id.LIKEIT);
             Button bt_like = findViewById(R.id.BTN_LIKEIT);
-            System.out.println("paks >>>>>>>>>>> bt_like.getTag(): " + bt_like.getTag());
             int btLikeIdx = (int) bt_like.getTag();
             // 좋아요 상태인 경우
             if(like.getTag().equals(R.drawable.likeit)) {
@@ -1070,7 +1061,7 @@ public class MainActivity extends AppCompatActivity {
             onlyOneVisible(contents_index.SEARCH_RESULT_VIEW.getValue());
         } else {
             // 값이 없는경우
-            showAlert("알려드립니다.", "좋아요한 글이 없습니다.", "확인");
+            showAlert("안내", "좋아요한 글이 없습니다.", "확인");
         }
 
     }
@@ -1086,7 +1077,7 @@ public class MainActivity extends AppCompatActivity {
         // 값이 없는 경우
         if(totalCnt == 0) {
             // 값이 없는 경우
-            showAlert("알려드립니다.", "관심지역이 없습니다.", "확인");
+            showAlert("안내", "관심지역이 없습니다.", "확인");
         } else {
             // 값이 있는 경우
             for(int i = 0; i < totalCnt; i ++) {
@@ -1097,9 +1088,6 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject tmpObj = dbBoard.getOneData(board_idx);
                     String tmpGuType = (String)tmpObj.get("gu_type");
                     favTitle[i] = tmpGuType;
-
-                    System.out.println("tsetsetsetsetset: " + favTitle[i]);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1138,8 +1126,6 @@ public class MainActivity extends AppCompatActivity {
         int maxIdx = 0;
         int maxGu = 0;
 
-        System.out.println("qweqweqweqwe > " + list.length);
-
         for(int i = 0; i < list.length; i ++) {
             if(list[i].equals("GU00")) intList[0] += 1;
             if(list[i].equals("GU01")) intList[1] += 1;
@@ -1169,17 +1155,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for(int i = 0; i < 25; i ++) {
-            System.out.println("paks >>>>>> favRank: "+i+" > " + intList[i]);
             if(intList[i] > maxIdx) {
                 maxIdx = intList[i];
                 maxGu = i;
             }
-            System.out.println("paks >>>>>> maxGu > " + maxGu);
         }
-
         String tmp = intToStringWhenUnderTen("GU" , maxGu);
-        System.out.println("paks >>>>>>>>>>>>>> tmp: " + tmp);
-
         return tmp;
     }
 

@@ -181,7 +181,7 @@ public class DBBoard extends SQLiteOpenHelper {
         return result;
     }
 
-    int totalBoardCnt = 41;
+    int totalBoardCnt = 39;
 
     String[] subject = new String[totalBoardCnt];      // 행사 타이틀
     String[] intro_text = new String[totalBoardCnt];    // 소개글
@@ -586,26 +586,6 @@ public class DBBoard extends SQLiteOpenHelper {
         image1[38] = "GU22_2.jpg";
         image2[38] = "";
         gu[38] = "GU22";
-
-        subject[39] = "송파구 일자리박람회 개최";
-        start_date[39] = "2019-10-16";
-        end_date[39] = "2019-10-16";
-        a_link[39] = "http://www.songpa.go.kr/user.kdf?a=songpa.openadmin.news.NewsApp&c=1002&seq=26080&code=1&cate_id=AG0401000000";
-        intro_text[39] = "'내 일자리를 찾아서, 문정컬처밸리로!'   송파구 일자리박람회에 오세요~ 취업을 희망하는 누구나 참여가능합니다.  현장면접 참여기업은 첨부파일을 확인해주세요^^";
-        event_location[39] = "문정컬쳐밸리 선큰광장";
-        image1[39] = "GU23_2.jpg";
-        image2[39] = "";
-        gu[39] = "GU23";
-
-        subject[40] = "제1회 성내1동 마을축제 [함께 나누고 즐기는 행복한 과학여행] 안내";
-        start_date[40] = "2019-09-23  11:00";
-        end_date[40] = "2019-09-23 ";
-        a_link[40] = "https://www.gangdong.go.kr/post/41140513421151734?ap=B1140&bbsId=1140";
-        intro_text[40] = "제1회 성내1동 마을축제 [함께 나누고 즐기는 행복한 과학여행] 안내";
-        event_location[40] = "환영고";
-        image1[40] = "GU24_2.jpg";
-        image2[40] = "";
-        gu[40] = "GU24";
     }
 
     // 샘플 데이터
