@@ -457,6 +457,95 @@ public class DBBoard extends SQLiteOpenHelper {
         image2[25] = "";
         gu[25] = "GU24";
 
+        subject[26] = "중구민과 함께하는 평화기원 가을 남산걷기 안내";
+        start_date[26] = "2019. 9. 28 08:30";
+        end_date[26] = "2019. 9. 28 11:00";
+        a_link[26] = "http://www.junggu.seoul.kr/content.do?cmsid=11329&mode=view&cid=902325572";
+        intro_text[26] = " - 1부(걷  기  행  사) : 동별 걷기코스 따라 남산걷기, 버스킹 공연    - 2부(평화기원행사) : 팔각광장에서 평화기원 문화행사 개최";
+        event_location[26] = "남산 팔각정  (10:00 집결)";
+        image1[26] = "";
+        image2[26] = "";
+        gu[26] = "GU01";
+
+        subject[27] = "제1회 용산구 마을/자치 박람회 개최";
+        start_date[27] = "2019-10-02 10:00";
+        end_date[27] = "2019-10-02 16:00";
+        a_link[27] = "http://www.yongsan.go.kr/pms/board/detail.do?boardidn=81&sitecdv=S0000100&decorator=pmsweb&menucdv=04030100&boardseqn=8040";
+        intro_text[27] = " - 서울마을주간' 기념식 : 용산마을약속, 마을자치 유공 표창 등   - 마을/자치 박람회 :  전시마당, 체험마당, 참여마당";
+        event_location[27] = "(주관)용산구 마을자치센터, (주최)용산구";
+        image1[27] = "GU02_02.jpg";
+        image2[27] = "";
+        gu[27] = "GU02";
+
+        subject[28] = "2019년 태양광엑스포개최";
+        start_date[28] = "2019.10.23";
+        end_date[28] = "2019.10.25";
+        a_link[28] = "http://www.sd.go.kr/sd/main.do?op=view&boardSeq=11758&groupSeq=46&mCode=13E010010000&lop=&preViewNum=1";
+        intro_text[28] = "서울에너지공사에서 서울시와 함께 태양광 엑스포를 아래와 같이 개최합니다 . 서울에너지공사에서 서울시와 함께 태양광 엑스포를 아래와 같이 개최합니다";
+        event_location[28] = "서울광장";
+        image1[28] = "";
+        image2[28] = "";
+        gu[28] = "GU03";
+
+        subject[29] = "[광나루아카데미] 제5회 광나루아카데미";
+        start_date[29] = "2019.09.25 09:00";
+        end_date[29] = "2019.10.28 18:00";
+        a_link[29] = "https://www.gwangjin.go.kr/edu/pgm/edu/view.do?progrmSn=1005&menuNo=400008&pageIndex=1";
+        intro_text[29] = "이금희와 함께하는 광나루 Academy";
+        event_location[29] = "나루아트센터 대공연장";
+        image1[29] = "GU04_02.jpg";
+        image2[29] = "";
+        gu[29] = "GU04";
+
+        subject[30] = "마을아, 진로를 부탁해!! 해피 Two-Gather 『동대문구 진로직업 박람회』행사 안내";
+        start_date[30] = "2019.10.10";
+        end_date[30] = "2019.10.11";
+        a_link[30] = "http://www.ddm.go.kr/ddm/gujungNewsview.jsp?pid=61868&searchParam1=&searchParam2=&pageNo=1&blockNo=0";
+        intro_text[30] = "명사특강, 토크콘서트, 진로마술쇼, 샌드아트, 비보잉 쇼 등";
+        event_location[30] = "구청 2층 다목적 강당 및 아트 갤러리, 구청 1층 광장";
+        image1[30] = "GU05_02.jpg";
+        image2[30] = "";
+        gu[30] = "GU05";
+
+        subject[31] = "2019. 광진구 학부모아카데미 '수학은 잘못이 없다.자녀의 미래를 여는 수학공부법'";
+        start_date[31] = "2019.09.23 09:00";
+        end_date[31] = "2019.10.18 23:00	";
+        a_link[31] = "https://www.gwangjin.go.kr/edu/pgm/edu/view.do?progrmSn=1004&ctgryCd=0205&menuNo=400059&pageIndex=1";
+        intro_text[31] = "수학은 잘못이 없다 자녀의 미래를 여는 수학공부법";
+        event_location[31] = "광진구청 대강당(3층)";
+        image1[31] = "GU05_03.jpg";
+        image2[31] = "";
+        gu[31] = "GU05";
+
+        subject[32] = "2019 흥인지문 바자회";
+        start_date[32] = "2019.10.18 08:00";
+        end_date[32] = "2019.10.18 18:00";
+        a_link[32] = "http://www.ddm.go.kr/ddm/otherNewsview.jsp?pid=61872&searchParam1=&searchParam2=&pageNo=1&blockNo=0";
+        intro_text[32] = "2019 흥인지문 바자회  '소박하지만 확실히 행복한 바자회'";
+        event_location[32] = "복지관 1층 잔디광장";
+        image1[32] = "GU06_02.jpg";
+        image2[32] = "";
+        gu[32] = "GU06";
+
+        subject[33] = "'한방만두 요리대회' 참가자 모집 안내";
+        start_date[33] = "2019.10.11 10:00";
+        end_date[33] = "2019.10.12 18:00";
+        a_link[33] = "http://www.ddm.go.kr/ddm/otherNewsview.jsp?pid=61872&searchParam1=&searchParam2=&pageNo=1&blockNo=0";
+        intro_text[33] = "동대문구 서울한방진흥센터에서는 서울약령시 우수 한방상품 홍보와 지역경제 활성화를 위해     2019년 10월 12일 토요일에 '2019 한방 프리마켓 - 한방에 놀장(場)' 행사를 개최합니다.";
+        event_location[33] = "서울한방진흥센터 1층 야외마당";
+        image1[33] = "GU06_03.jpg";
+        image2[33] = "";
+        gu[33] = "GU06";
+
+        subject[34] = "사랑마을 길2시장 참여신청";
+        start_date[34] = "2019.10.12 11:00";
+        end_date[34] = "2019.10.12 16:00";
+        a_link[34] = "http://www.sb.go.kr/PageLink.do?link=forward:/cop/bbs/booth.do&tempParam1=&menuNo=02000000&subMenuNo=02240000&thirdMenuNo=&fourthMenuNo=";
+        intro_text[34] = "따뜻한 나눔 정다운 이웃";
+        event_location[34] = "래미안길음센터피스 102동 맞은편";
+        image1[34] = "GU08_02.jpg";
+        image2[34] = "";
+        gu[34] = "GU08";
 
     }
 
