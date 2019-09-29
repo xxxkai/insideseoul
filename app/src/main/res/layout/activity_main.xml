@@ -102,13 +102,6 @@
                         android:layout_height="match_parent"
                         layout="@layout/mypage_layout"
                         />
-                    <!-- 언어 설정 뷰 -->
-                    <include
-                        android:id="@+id/language_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        layout="@layout/language_layout"
-                        />
                     <!-- 회원가입 뷰 -->
                     <include
                         android:id="@+id/signup_view"

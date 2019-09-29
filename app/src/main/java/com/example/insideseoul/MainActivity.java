@@ -133,13 +133,12 @@ public class MainActivity extends AppCompatActivity {
                         R.id.local_name_10, R.id.local_name_11, R.id.local_name_12, R.id.local_name_13, R.id.local_name_14,
                         R.id.local_name_15, R.id.local_name_16, R.id.local_name_17, R.id.local_name_18, R.id.local_name_19,
                         R.id.local_name_20, R.id.local_name_21, R.id.local_name_22, R.id.local_name_23, R.id.local_name_24
-    };
+    };  
     int[] contents_list = { R.id.graphic_view, R.id.map_all_view,
                             R.id.settings_view, R.id.mypage_view,
-                            R.id.language_view, R.id.signup_view,
-                            R.id.web_view, R.id.search_result_view,
-                            R.id.result_detail_view, R.id.question_view,
-                            R.id.login_view};
+                            R.id.signup_view, R.id.web_view,
+                            R.id.search_result_view, R.id.result_detail_view,
+                            R.id.question_view, R.id.login_view};
 
     // 게시글 숫자
     int[] board_cnt = new int[25];
@@ -147,10 +146,9 @@ public class MainActivity extends AppCompatActivity {
     public enum CONTENTS_INDEX {
         GRAPHIC_VIEW(0), MAP_ALL_VIEW(1),
         SETTINGS_VIEW(2), MYPAGE_VIEW(3),
-        LANGUAGE_VIEW(4), SIGNUP_VIEW(5),
-        WEB_VIEW(6), SEARCH_RESULT_VIEW(7),
-        RESULT_DETAIL_VIEW(8), QUESTION_VIEW(9),
-        LOGIN_VIEW(10);
+        SIGNUP_VIEW(4), WEB_VIEW(5),
+        SEARCH_RESULT_VIEW(6), RESULT_DETAIL_VIEW(7),
+        QUESTION_VIEW(8), LOGIN_VIEW(9);
 
         private int value;
         private CONTENTS_INDEX(int value) {
