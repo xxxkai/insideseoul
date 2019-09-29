@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.insideseoul.Cipher;
 import com.example.insideseoul.MainActivity;
 
 import org.json.JSONArray;
@@ -38,6 +39,23 @@ public class DBMember extends SQLiteOpenHelper {
         this.version = version;
         this.factory = factory;
         SQLiteDatabase db = getWritableDatabase();
+
+    }
+
+    // 기본 데이터 입력
+    public void sampleInsert() {
+        // 읽고 쓰기가 가능하게 DB 열기
+        SQLiteDatabase db = getWritableDatabase();
+        // DB에 입력한 값으로 행 추가
+        ContentValues values = new ContentValues();
+        values.put("email", "test");
+        values.put("password", Cipher.getBase64(Cipher.doCipher("1111".getBytes())));
+        values.put("approval_yn", "Y");
+        values.put("name", "test");
+        values.put("member_class", "ADM");
+        db.insert(tb_name, null, values);
+
+        db.close();
     }
 
     //새로운 데이터 입력
