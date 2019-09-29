@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="3dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:onClick="logout"
                 android:id="@+id/BT_LOGOUT"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="@drawable/mp_logout" />
 
         </LinearLayout>

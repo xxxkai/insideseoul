@@ -9,20 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="이메일 문의"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#515252"
             android:gravity="center"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +32,9 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:text="수신 이메일" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <EditText
             android:id="@+id/INPUT_RECEIVE_EMAIL"
@@ -43,7 +42,7 @@
             android:layout_height="40dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:background="@drawable/photo_frame"/>
+            android:background="@drawable/photo_frame2"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp"/>
@@ -55,14 +54,17 @@
             android:textStyle="bold"
             android:text="문의 내용"
             />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <EditText
             android:id="@+id/INPUT_SEND_MSG"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="350dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:background="@drawable/photo_frame"/>
+            android:background="@drawable/photo_frame2"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp"/>
@@ -70,7 +72,9 @@
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="#757676"
+            android:textStyle="bold"
             android:layout_gravity="right"
             android:background="@drawable/button_frame"
             android:onClick="notSupported"

@@ -9,20 +9,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="환경 설정"
             android:textStyle="bold"
             android:textColor="#515252"
             android:textSize="20dp"
             android:gravity="center"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
