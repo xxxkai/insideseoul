@@ -52,7 +52,7 @@ public class DBInit extends SQLiteOpenHelper {
             } else if(name.equals("tbl_like")) {
                 sb.append("CREATE TABLE IF NOT EXISTS " + name + " (");
                 sb.append("idx INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
-                sb.append("name VARCHAR(50) NOT NULL, ");
+                sb.append("email VARCHAR(200) NOT NULL, ");
                 sb.append("board_idx INTEGER NOT NULL");
                 sb.append(") ");
             } else if(name.equals("tbl_board")) {
