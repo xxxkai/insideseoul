@@ -457,24 +457,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
         startActivity(intent);
 */
-        //onlyOneVisible(contents_index.SIGNUP_VIEW.getValue());
-        GuJSONParser guJSONParser = new GuJSONParser();
-        MetroJSONParser metroJSONParser = new MetroJSONParser();
-
-        List guList = new ArrayList<Integer>();
-        List metroList = new ArrayList<Integer>();
-        try {
-            guList = guJSONParser.execute().get();
-            metroList = metroJSONParser.execute().get();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /* // 실제 파싱된 데이터 불러오기 */
-
-
-        /* 값 확인용 // */
-        showMsg("paks >>>>>>>>>>> guList" + guList);
-        showMsg("paks >>>>>>>>>>> metroList" + metroList);
+        return;
     }
 
     public void showAlert(String title, String content, String exit_bt_comment) {
