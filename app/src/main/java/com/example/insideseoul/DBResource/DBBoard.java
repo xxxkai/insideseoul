@@ -203,7 +203,7 @@ public class DBBoard extends SQLiteOpenHelper {
         intro_text[0] = "나날이 늘어가는 미세먼지에 대한 고민! 그저 손놓고 있을 수만은 없습니다. 그래서 이에 대한 해결책으로 종로구에서는 실내 미세먼지 제거 및 주민들 건강관리를 위한 공기정화식물 키우기 교육을 마련하였습니다.\n" +
                 "이번 교육은 전문강사와 함께 공기정화식물을 잘 가꾸는 방법에 대한 이론을 배우고, 공기정화식물을 직접 분갈이 해보는 실습도 함께 진행되므로이번 교육에 많이 참여하셔서 몸과 마음의 건강을 모두 챙겨볼 수 있는 시간을 가져보세요.";
         event_location[0] = "짚풀생활사박물관 외 회별 탐방 박물관·문학관";
-        image1[0] = "sample.jpg";
+        image1[0] = "";
         image2[0] = "";
         gu[0] = "GU00";
 
@@ -213,7 +213,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[1] = "https://www.jongno.go.kr/portal/app/integrateApp/view.do?id=373&menuNo=388366";
         intro_text[1] = "짚풀생활사박물관 외 회별 탐방 박물관·문학관";
         event_location[1] = "짚풀생활사박물관 외 탐방기관";
-        image1[1] = "sample.jpg";
+        image1[1] = "";
         image2[1] = "";
         gu[1] = "GU00";
 
@@ -237,13 +237,13 @@ public class DBBoard extends SQLiteOpenHelper {
         image2[3] = "";
         gu[3] = "GU02";
 
-        subject[4] = "[성동문화주간] 2019 태조이성계축제 개최\n";
+        subject[4] = "[성동문화주간] 2019 태조이성계축제 개최";
         start_date[4] = "2019.09.28";
         end_date[4] = "2019.09.28";
         a_link[4] = "http://www.sd.go.kr/sd/main.do?op=view&boardSeq=11708&groupSeq=46&mCode=13E010010000&lop=&preViewNum=2";
         intro_text[4] = "<태조 이성계 축제>";
         event_location[4] = "살곶이다리 등";
-        image1[4] = "";
+        image1[4] = "GU03.jpg";
         image2[4] = "";
         gu[4] = "GU03";
 
@@ -253,7 +253,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[5] = "https://www.gwangjin.go.kr/portal/bbs/B0000045/view.do?nttId=539610&menuNo=201076&pageIndex=1";
         intro_text[5] = "하반기(9~10월) 청춘뜨락 공연";
         event_location[5] = "건대역 2번출구 청춘뜨락";
-        image1[5] = "";
+        image1[5] = "GU04.jpg";
         image2[5] = "";
         gu[5] = "GU04";
 
@@ -263,7 +263,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[6] = "http://www.ddm.go.kr/ddm/cultureBBSview.jsp?pid=61881&searchParam1=&searchParam2=&pageNo=1&blockNo=0";
         intro_text[6] = "(사)서울약령시협회에서는 우리민족의 자랑이자 문화유산인 한방의 우수성과 안전성을 널리 홍보하고 대한민국 한의약의 메카인 서울약령시의 발전을 도모하고자 「제25회 서울약령시 한방문화축제」를 아래와 같이 개최하오니 많은 관심과 참여바랍니다.";
         event_location[6] = "서울한방진흥센터 및 약령중앙로 일대";
-        image1[6] = "";
+        image1[6] = "GU05.jpg";
         image2[6] = "";
         gu[6] = "GU05";
 
@@ -273,7 +273,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[7] = "http://www.jungnang.go.kr/portal/bbs/view/B0000002/27956.do?menuNo=200473";
         intro_text[7] = "- 가족과 함께 즐기는 마술공연\n - 빡독(빡세게 독서하기)대회 사전신청 : 중랑구립정보도서관 홈페이지 \n- 독서문화행사 신청 \n- 어린이와 함께 하는 독서 골든벨 \n- 채사장 저자강연회";
         event_location[7] = "양원숲속도서관 인근 잔디광장";
-        image1[7] = "";
+        image1[7] = "GU06.jpg";
         image2[7] = "";
         gu[7] = "GU06";
 
@@ -283,7 +283,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[8] = "http://www.sb.go.kr/main/cop/bbs/selectBoardArticle.do?bbsId=B0316_main&nttId=9458901&menuNo=07000000&subMenuNo=07070000&thirdMenuNo=07070100&fourthMenuNo=";
         intro_text[8] = "성화봉송 맞이 행사 및 성화봉송 인계";
         event_location[8] = "한성대 입구역~성북구청R~대광고R";
-        image1[8] = "";
+        image1[8] = "GU07.jpg";
         image2[8] = "";
         gu[8] = "GU07";
 
@@ -293,7 +293,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[9] = "http://www.gangbuk.go.kr/www/boardView.do?key=297&boardSeq=49&post=804540";
         intro_text[9] = "- 세계혁신포럼 : 지속가능한 스마트시티를 위하여\n - HI-TECh FAIR : 4차 산업혁명과 도시의 미래\n - UNESCO-WTA 국제공동워크숍 : 스마트시티 관점에서의 과학시술단지 발전";
         event_location[9] = "대전컨벤션센터(DCC)";
-        image1[9] = "";
+        image1[9] = "GU08.jpg";
         image2[9] = "";
         gu[9] = "GU08";
 
@@ -323,7 +323,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[12] = "https://www.ep.go.kr/CmsWeb/viewPage.req?idx=PG0000001131&boardId=BO0000000087&CP0000000002_BO0000000087_Action=boardView&CP0000000002_BO0000000087_ViewName=board/BoardView&boardDataId=206935";
         intro_text[12] = "은평구 '사회적경제 어울림한마당 행사'";
         event_location[12] = "연신내 물빛공원";
-        image1[12] = "";
+        image1[12] = "GU11.jpg";
         image2[12] = "";
         gu[12] = "GU11";
 
@@ -333,7 +333,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[13] = "http://www.sdm.go.kr/news/news/notice.do";
         intro_text[13] = "우주날씨 이야기";
         event_location[13] = "서대문자연사박물관 1층 시청각실";
-        image1[13] = "";
+        image1[13] = "GU12.jpg";
         image2[13] = "";
         gu[13] = "GU12";
 
@@ -343,7 +343,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[14] = "https://www.mapo.go.kr/site/main/board/culturevent/229742?cp=1&sortOrder=BA_REGDATE&sortDirection=DESC&listType=list&bcId=culturevent&baNotice=false&baCommSelec=false&baOpenDay=false&baUse=true";
         intro_text[14] = "마포구청소년자원봉사대회";
         event_location[14] = "마포중안도서관 6층 세미나실";
-        image1[14] = "";
+        image1[14] = "GU13.jpg";
         image2[14] = "";
         gu[14] = "GU13";
 
@@ -353,7 +353,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[15] = "http://www.yangcheon.go.kr/site/yangcheon/ex/bbs/View.do?cbIdx=254&bcIdx=221271&parentSeq=221271";
         intro_text[15] = "성화봉송 축하행사 및 출발행사";
         event_location[15] = "신트리공원(신정1동 310-7)";
-        image1[15] = "";
+        image1[15] = "GU14.jpg";
         image2[15] = "";
         gu[15] = "GU14";
 
@@ -363,7 +363,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[16] = "http://www.gangseo.seoul.kr/new_portal/announce/main_1_view.jsp?board_id=5&list_id=9007&page=1&s_key=&s_gubun=null&show=null&rboard_id=5";
         intro_text[16] = "2019 강서 마을박람회 개최";
         event_location[16] = "김포공항 롯데몰 1층 잔디광장 일대";
-        image1[16] = "";
+        image1[16] = "GU15.jpg";
         image2[16] = "";
         gu[16] = "GU15";
 
@@ -393,7 +393,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[19] = "http://www.ydp.go.kr/main/board/bbs.do?cfgIdx=211&mCode=F040140000&op=view&idxId=234343";
         intro_text[19] = "제24회 『영등포 구민의 날』을 맞이하여 영등포 구민 모두가 다같이 경축하고 기념하고자 다음과 같이 행사를 개최합니다.";
         event_location[19] = "영등포 아트홀 대강당 및 2층 전시실";
-        image1[19] = "";
+        image1[19] = "GU18.jpg";
         image2[19] = "";
         gu[19] = "GU18";
 
@@ -413,7 +413,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[21] = "http://www.gwanak.go.kr/html/gang/sub/sub.html";
         intro_text[21] = "역사를 품은 강감찬도시 관악에서 강감찬 장군과 고려의 역사문화를 만나보세요!";
         event_location[21] = "관악구";
-        image1[21] = "";
+        image1[21] = "GU20.jpg";
         image2[21] = "";
         gu[21] = "GU20";
 
@@ -423,7 +423,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[22] = "http://www.seoripul.org/kor/about/about01.jsp";
         intro_text[22] = "음악으로 하나되다";
         event_location[22] = "반포대로, 양재천, 악기거리 등 서초구 일대";
-        image1[22] = "";
+        image1[22] = "GU21.jpg";
         image2[22] = "";
         gu[22] = "GU21";
 
@@ -443,7 +443,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[24] = "http://www.songpa.go.kr/user.kdf?a=songpa.openadmin.news.NewsApp&c=1002&seq=26090&code=1&cate_id=AG0401000000";
         intro_text[24] = "청년 꿈꾸는 내 일(Job)";
         event_location[24] = "송파구청(신관 8층 송파아카데미)";
-        image1[24] = "";
+        image1[24] = "GU23.jpg";
         image2[24] = "";
         gu[24] = "GU23";
 
@@ -453,7 +453,7 @@ public class DBBoard extends SQLiteOpenHelper {
         a_link[25] = "https://www.gangdong.go.kr/post/41140513421151734?ap=B1140&bbsId=1140";
         intro_text[25] = "행복한 과학여행";
         event_location[25] = "강동구청앞 열린뜰";
-        image1[25] = "";
+        image1[25] = "GU24.jpg";
         image2[25] = "";
         gu[25] = "GU24";
     }
