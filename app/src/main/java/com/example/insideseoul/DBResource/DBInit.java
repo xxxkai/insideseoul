@@ -79,6 +79,10 @@ public class DBInit extends SQLiteOpenHelper {
                 db.execSQL(sb.toString());
                 // if(name.equals("tbl_member")) dbMember = new DBMember(context, "tbl_member", null, 1);
                 if(name.equals("tbl_board")) dbBoard = new DBBoard(context, "tbl_board", null, 1, 1);
+                if(name.equals("tbl_member")) {
+                    dbMember =new DBMember(context, "tbl_member", null, 1);
+                    dbMember.sampleInsert();
+                }
             }
         } else {
             Log.i("paks >>>>>>>>>>>>>>> doesDatabaseExist: ","DB Exist");

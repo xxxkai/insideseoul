@@ -137,4 +137,43 @@ public class DBLike extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + tb_name + " WHERE email= '" + email + "' and board_idx = " + boardIdx + ";");
         db.close();
     }
+
+    // 관심지역 추출
+    public JSONArray getFavLocation(String email) {
+        // 읽기가 가능하게 DB 열기
+        SQLiteDatabase db = getReadableDatabase();
+        String result = "";
+
+        // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tb_name + " WHERE email = '" + email + "'", null);
+        JSONArray resultSet = new JSONArray();
+        cursor.moveToLast();
+        int index = 0;
+        while (index < cursor.getCount()) {
+
+            int totalColumn = cursor.getColumnCount();
+            JSONObject rowObject = new JSONObject();
+
+            for (int i = 0; i < totalColumn; i++) {
+                if (cursor.getColumnName(i) != null) {
+                    try {
+                        if (cursor.getString(i) != null) {
+                            rowObject.put(cursor.getColumnName(i), cursor.getString(i));
+                        } else {
+                            rowObject.put(cursor.getColumnName(i), "");
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+
+            }
+            resultSet.put(rowObject);
+            cursor.moveToPrevious();
+            index = index + 1;
+        }
+
+        cursor.close();
+        return resultSet;
+    }
 }
