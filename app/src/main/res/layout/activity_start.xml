@@ -86,12 +86,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Ver0.01"
             android:gravity="bottom"
+            android:text="Ver1.00"
             android:textAlignment="viewEnd"
             android:textColor="#ffffff"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
 

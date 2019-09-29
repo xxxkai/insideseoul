@@ -24,9 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/dot_line" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
 
         <!-- 항목 1 시작 -->
         <LinearLayout

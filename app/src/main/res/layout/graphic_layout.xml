@@ -14,7 +14,7 @@
             android:orientation="vertical">
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="10dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -25,19 +25,19 @@
                 android:text="서울 시" />
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="10dp" />
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="400dp"
+                    android:layout_height="340dp"
                     app:srcCompat="@drawable/map_all" />
                 </LinearLayout>
 
@@ -63,16 +63,13 @@
 
                 </LinearLayout>
             </FrameLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/dot_line" />
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="10dp" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
